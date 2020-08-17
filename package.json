@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "zadarma api v1",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "test"
   },
