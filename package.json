@@ -1,0 +1,26 @@
+{
+  "name": "zadarma",
+  "version": "1.0.0",
+  "description": "zadarma api v1",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gravitymir/zadarma.git"
+  },
+  "keywords": [
+    "zadarma",
+    "api",
+    "v1",
+    "nodejs",
+    "javascript"
+  ],
+  "author": "gravitymir",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gravitymir/zadarma/issues"
+  },
+  "homepage": "https://github.com/gravitymir/zadarma#readme"
+}
