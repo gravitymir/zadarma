@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "zadarma api v1",
   "main": "index.js",
-  "type": "module",
+  "deprecated": false,
   "scripts": {
     "test": "test"
   },
+  "engines": {
+    "node": ">=8"
+  },
+  "dependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gravitymir/zadarma.git"
