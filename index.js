@@ -45,7 +45,7 @@ const zadarma = require("./v1/index.js");
     // }));
 
     //console.log(await zadarma.pbxInternal());
-    console.log(await zadarma.pbxInternalStatus(100));
+    //console.log(await zadarma.pbxInternalStatus(100));
 
     //error put
     // console.log(await zadarma.pbxInternalOnOffRecording({
@@ -54,11 +54,68 @@ const zadarma = require("./v1/index.js");
     //     email: ''
     // }));
 
-    console.log(await zadarma.smsSend({
-        number: '380989897908',
-        message: 'test text'
-    }));
+    //error put
+    // console.log(await zadarma.smsSend({
+    //     number: '380989897908',
+    //     message: 'test text'
+    // }));
     //console.log(await zadarma.statisticsPbx(100));
 }
 )();
 ;
+
+
+let o = {
+    values: [9,8,7,6,5,4,3,2,1],
+    [Symbol.iterator](){
+        let i = 0;
+        return {
+            next: () => {
+                const value = this.values[i];
+                i++
+                return {
+                    done: i > this.values.length,
+                    value
+                }
+            }
+        }
+    }
+}
+
+
+for (let item of o){
+    console.log(item);
+}
+
+
+const str = 'asdasd';
+console.log(str.startsWith('as'));
+console.log(str.endsWith('d'));
+
+console.log(str.includes('d'));
+
+console.log([1,2,3].includes(2));
+console.log('asd'.repeat(2));
+console.log('asd'.padStart(6, 'asd'));
+
+
+console.log(' asd '.trim(2));
+console.log(' asd '.trimStart(2));
+
+
+function abc(arr){
+    return arr.reduce((acc, i) => {
+        return acc += i
+    }, 0) / arr.length
+}
+
+console.log(abc([10,20,30,40]));
+
+let s = {
+    s: 10
+}
+
+let a = s;
+
+console.log(Object.is(s, a));
+
