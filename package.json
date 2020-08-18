@@ -10,7 +10,10 @@
   "engines": {
     "node": ">=8"
   },
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.19.2",
+    "crypto": "^1.0.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gravitymir/zadarma.git"
