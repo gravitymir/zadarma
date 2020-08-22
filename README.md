@@ -7,14 +7,7 @@ Class which help you work with API Zadarma (v1)
 ## How to use?
 An official documentation on Zadarma API is [here](https://zadarma.com/support/api/).
 
-
-```html
-<link rel="stylesheet" href="/path/to/styles/default.css">
-<script src="/path/to/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-```
-## How to use?
-<div class="highlight js">
+```js
 let response;
     response = await z_api({api_method: '/v1/info/balance/'});
     console.log(response);
@@ -31,8 +24,10 @@ let response;
             predicted: 'predicted'
         }
     });
-    console.log(response);
-</div>
+console.log(response);
+```
+
+
 
 
 
