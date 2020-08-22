@@ -7,8 +7,12 @@ Class which help you work with API Zadarma (v1)
 ## How to use?
 An official documentation on Zadarma API is [here](https://zadarma.com/support/api/).
 
-Keys for authorization are in [personal account](https://my.zadarma.com/api/).
-[![Build Status](https://travis-ci.org/highlightjs/highlight.js.svg?branch=master)](https://travis-ci.org/highlightjs/highlight.js) [![Greenkeeper badge](https://badges.greenkeeper.io/highlightjs/highlight.js.svg)](https://greenkeeper.io/) [![install size](https://packagephobia.now.sh/badge?p=highlight.js)](https://packagephobia.now.sh/result?p=highlight.js)
+
+```html
+<link rel="stylesheet" href="/path/to/styles/default.css">
+<script src="/path/to/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+```
 ## How to use?
 <div class="highlight js">
 let response;
