@@ -13,13 +13,13 @@ https://zadarma.com/en/support/api/
 const axios = require('axios');
 const crypto = require('crypto');
 
-const userKey = process.env.ZADARMA_USER_KEY;
-const secretKey = process.env.ZADARMA_SECRET_KEY;
-
-const api = exports = module.exports = {};
-
 const prepare = function prepare(...args){
-    let {api_method, params = {}} = args.shift();
+    let {
+        api_method,
+        params = {},
+        api_user_key = process.env.ZADARMA_USER_KEY,
+        api_secret_key = process.env.ZADARMA_SECRET_KEY
+    } = args.shift();
 
     let params_string = Object.keys(params)
         .sort((a, b) => a === b ? 0 : a > b ? 1 : -1)
@@ -35,18 +35,18 @@ const prepare = function prepare(...args){
 
     let data = api_method + params_string + md5;
 
-    let hex = crypto.createHmac('sha1', secretKey)
+    let hex = crypto.createHmac('sha1', api_secret_key)
         .update(data).digest('hex');
 
     let sign = Buffer.from(hex).toString('base64');
 
     return {
-        headers: {"Authorization": `${userKey}:${sign}`},
+        headers: {"Authorization": `${api_user_key}:${sign}`},
         params_string: params_string
     }
 }
 
-api.request = async function request(...args){
+module.exports = async function request(...args){
     let {http_method = 'get', api_method, params} = args.shift();
 
     let {headers, params_string} = prepare({
@@ -63,7 +63,6 @@ api.request = async function request(...args){
             data: params_string,
             headers: headers})
         .then(response => {
-            console.log(response)
             resolve(response.data);
         })
         .catch(error => {
