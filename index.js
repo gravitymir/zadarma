@@ -1,14 +1,15 @@
 require("./process.env.js");
-const z_api = require("./v1/index.js");
+const {api} = require("./v1/index.js");
+const {api: z_api} = require("./v1/index.js");
 
 
 (async function(){
-    
-    
-    /*
     let response;
     response = await z_api({api_method: '/v1/info/balance/'});
     console.log(response);
+    
+    /*
+    
 
     api_user_key = process.env.ZADARMA_USER_KEY,
     api_secret_key = process.env.ZADARMA_SECRET_KEY

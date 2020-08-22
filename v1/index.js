@@ -46,7 +46,7 @@ const prepare = function prepare(...args){
     }
 }
 
-module.exports = async function request(...args){
+module.exports.api = async function request(...args){
     let {http_method = 'get', api_method, params} = args.shift();
 
     let {headers, params_string} = prepare({
