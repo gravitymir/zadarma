@@ -9,24 +9,24 @@ An official documentation on Zadarma API is [here](https://zadarma.com/support/a
 
 ##Getting Started
 
-####Web
+#### Web
 ```js
 const {api} = require("./v1/index.js");
 //or
 const {api: z_api} = require("./v1/index.js");
 ```
 
-####Node.js
+#### Node.js
 ```bash
 npm i zadarma -g
 ```
 
-####Web
+#### Web
 ```shell
 npm i zadarma -g
 ```
 
-##Using with Express
+## Using with Express
 ```js
 const {express_middleware_zadarma} = require("./v1/index.js");
 ```
