@@ -1,3 +1,8 @@
+
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+
 <link rel="stylesheet" href="/path/to/styles/default.css">
 <script src="/path/to/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
@@ -14,7 +19,7 @@ An official documentation on Zadarma API is [here](https://zadarma.com/support/a
 Keys for authorization are in [personal account](https://my.zadarma.com/api/).
 
 
-<div class="highlight highlight-source-js">
+<div class="highlight highlight-js">
 let response;
     response = await z_api({api_method: '/v1/info/balance/'});
     console.log(response);
