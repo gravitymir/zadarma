@@ -3,10 +3,10 @@ const z_api = require("./v1/index.js");
 
 
 (async function(){
-    let response;
+    
     
     /*
-
+    let response;
     response = await z_api({api_method: '/v1/info/balance/'});
     console.log(response);
 
