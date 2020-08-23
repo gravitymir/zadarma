@@ -17,11 +17,15 @@ npm i zadarma -g
 const {api} = require("zadarma");
 ```
 
+#### Authorization keys
+Page authorization keys: [here](https://my.zadarma.com/api/#)
+
 ```js
 const {api: z_api} = require("zadarma");
 let response = await z_api({api_method: '/v1/info/balance/'});
 console.log(response);
 ```
+
 ## Examples
 
 #### single account use
@@ -42,15 +46,15 @@ console.log(response);
 let response = await z_api.request({
     api_method: '/v1/tariff/',
     api_user_key: 'a248a6a984459935b569',//your user key
-    api_secret_key: '8a8e91d214fb728889c7'//your secret key https://my.zadarma.com/api/#
+    api_secret_key: '8a8e91d214fb728889c7'//your secret key
 });
 console.log(response);
 ```
 ```js
 const {api: z_api} = require("zadarma");
 let method = '/v1/tariff/';
-let user_key = 'your user key'; //Authorization keys
-let secret_key = 'your secret key'; //https://my.zadarma.com/api/#
+let user_key = 'your_user_key';
+let secret_key = 'your_secret_key';
 
 let response = await z_api.request({
     api_method: method,
