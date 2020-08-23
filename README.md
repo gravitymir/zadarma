@@ -13,6 +13,10 @@ An official documentation on Zadarma API is [here](https://zadarma.com/support/a
 
 ```shell
 npm i zadarma -g
+#or
+npm i zadarma
+#or
+npm install zadarma
 ```
 #### Require
 ```js
