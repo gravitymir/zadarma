@@ -18,8 +18,6 @@ npm i zadarma
 #or
 npm install zadarma
 ```
-#### Require
-
 ## Authorization keys
 Page authorization keys: [here](https://my.zadarma.com/api/#)
 
@@ -35,7 +33,7 @@ process.env.ZADARMA_USER_KEY = 'a248a6a984459935b569';//your user key
 process.env.ZADARMA_SECRET_KEY = '8a8e91d214fb728889c7';//your secret key
 
 const {api} = require("zadarma");
-let tariff = await api.request({api_method: '/v1/tariff/'});
+let tariff = await api({api_method: '/v1/tariff/'});
 let balance = await api({api_method: '/v1/info/balance/'});
 
 console.log(tariff);
@@ -46,7 +44,7 @@ console.log(balance);
 ```js
 //Example with send "api_user_key" && "api_secret_key"
 const {api: z_api} = require("zadarma");
-let response = await z_api.request({
+let response = await z_api({
     api_method: '/v1/tariff/',
     api_user_key: 'a248a6a984459935b569',//your user key
     api_secret_key: '8a8e91d214fb728889c7'//your secret key
@@ -59,7 +57,7 @@ let method = '/v1/tariff/';
 let user_key = 'your_user_key';
 let secret_key = 'your_secret_key';
 
-let response = await z_api.request({
+let response = await z_api({
     api_method: method,
     api_user_key: user_key,
     api_secret_key: secret_key
@@ -70,7 +68,7 @@ console.log(response);
 #### parameters
 ```js
 //Example with parameters
-let response = await z_api.request({
+let response = await z_api({
     api_method: '/v1/request/callback/',
     params: {
         from: '73919100000',
@@ -88,7 +86,7 @@ console.log(response);
 let from = '73919100000';
 let to = '67200000000';
 
-let response = await z_api.request({
+let response = await z_api({
     http_method: 'post',
     api_method: '/v1/sms/send/',
     params: {
