@@ -19,14 +19,14 @@ npm i zadarma
 npm install zadarma
 ```
 #### Require
-```js
-const {api} = require("zadarma");
-```
 
 ## Authorization keys
 Page authorization keys: [here](https://my.zadarma.com/api/#)
 
-## Examples
+## Examples usage
+```js
+const {api} = require("zadarma");
+```
 
 #### single account use
 ```js
