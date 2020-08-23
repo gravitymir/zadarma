@@ -16,8 +16,8 @@ const {api: z_api} = require("./v1/index.js");
     response = await z_api.request({
         api_method: '/v1/request/callback/',
         params: {
-            from: '380947102794',
-            to: '380989897908',
+            from: '73919100000',
+            to: '67200000000',
             sip: '100',
             predicted: 'predicted'
         }
@@ -28,9 +28,9 @@ const {api: z_api} = require("./v1/index.js");
     //     http_method: 'post', 
     //     api_method: '/v1/sms/send/',
     //     params: {
-    //         caller_id: '380947102794',
-    //         number: '380989897908',//'67200000000',
-    //         message: 'nodejs fff ыфва ыыц'
+    //         caller_id: '73919100000',
+    //         number: '67200000000',
+    //         message: 'test sms 0987654321 тестовое смс'
     //     }
     // });
     // console.log(response);

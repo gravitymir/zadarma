@@ -40,8 +40,8 @@ let response;
     response = await z_api.request({
         api_method: '/v1/request/callback/',
         params: {
-            from: '380947102794',
-            to: '380989897908',
+            from: '73919100000',
+            to: '67200000000',
             sip: '100',
             predicted: 'predicted'
         }
