@@ -17,7 +17,7 @@ npm i zadarma -g
 const {api} = require("zadarma");
 ```
 
-#### Authorization keys
+## Authorization keys
 Page authorization keys: [here](https://my.zadarma.com/api/#)
 
 ```js
