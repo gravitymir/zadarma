@@ -2,10 +2,10 @@
 Module which help you work with API Zadarma (v1)
 
 ## Requirements:
-- Node.js >= 14.4.0
+- Node.js > 14.0.0
 
 ## How to use?
-An official documentation on Zadarma API is <a href="https://zadarma.com/support/api/" target="_blank">here</a>.
+An official documentation on Zadarma API is [here](https://zadarma.com/support/api/){:target="_blank"}.
 
 ## Getting Started
 
@@ -19,7 +19,7 @@ npm i zadarma
 npm install zadarma
 ```
 ## Authorization keys
-Page authorization keys: <a href="https://my.zadarma.com/api/#" target="_blank">here</a>.
+Page authorization keys: [here](https://my.zadarma.com/api/#){:target="_blank"}
 
 ## Usage examples
 ```js
