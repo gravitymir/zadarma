@@ -3,7 +3,6 @@ Module which help you work with API Zadarma (v1)
 
 ## Requirements:
 - Node.js
-- JavaScript
 
 ## How to use?
 An official documentation on Zadarma API is [here](https://zadarma.com/support/api/).
@@ -23,6 +22,7 @@ const {api: z_api} = require("zadarma");
 let response = await z_api({api_method: '/v1/info/balance/'});
 console.log(response);
 ```
+## Examples
 
 #### single account use
 ```js
