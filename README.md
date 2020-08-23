@@ -14,6 +14,8 @@ An official documentation on Zadarma API is [here](https://zadarma.com/support/a
 npm i zadarma -g
 ```
 
+<code>npm i zadarma -g</code>
+
 ```js
 const {api} = require("zadarma");
 //or
@@ -28,6 +30,7 @@ console.log(response);
 
 #### single account use
 ```js
+//Example configure default config
 process.env.ZADARMA_USER_KEY = 'a248a6a984459935b569';//your user key
 process.env.ZADARMA_SECRET_KEY = '8a8e91d214fb728889c7';//your secret key
 
@@ -39,7 +42,7 @@ console.log(response);
 
 #### multi account use
 ```js
-//send api_user_key && api_secret_key
+//Example with send "api_user_key" && "api_secret_key"
 let response = await z_api.request({
     api_method: '/v1/tariff/',
     api_user_key: 'a248a6a984459935b569',//your user key
@@ -72,7 +75,7 @@ response = await z_api.request({
     params: {
         caller_id: '73919100000',
         number: '67200000000',
-        message: 'test sms 0987654321 тестовое смс'
+        message: 'test sms 0987654321\nтестовый текст'
     }
 });
 console.log(response);
