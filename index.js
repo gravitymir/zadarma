@@ -1,6 +1,6 @@
 require("./process.env.js");
-const {api} = require("./zadarma/index.js");
-const {api: z_api} = require("./zadarma/index.js");
+const {api} = require("./zadarma");
+const {api: z_api} = require("./zadarma");
 
 (async function(){
     let response;
