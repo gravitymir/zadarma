@@ -2,7 +2,6 @@ require("./process.env.js");
 const {api} = require("./v1/index.js");
 const {api: z_api} = require("./v1/index.js");
 
-
 (async function(){
     let response;
     response = await z_api({api_method: '/v1/info/balance/'});

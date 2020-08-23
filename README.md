@@ -7,21 +7,19 @@ Class which help you work with API Zadarma (v1)
 ## How to use?
 An official documentation on Zadarma API is [here](https://zadarma.com/support/api/).
 
-##Getting Started
+## Getting Started
 
-#### Web
-```js
-const {api} = require("./v1/index.js");
-//or
-const {api: z_api} = require("./v1/index.js");
-```
-
-#### Node.js
-```bash
+```shell
 npm i zadarma -g
 ```
 
-#### Web
+```js
+const {api} = require("zadarma");
+//or
+const {api: z_api} = require("zadarma");
+```
+
+#### 
 ```shell
 npm i zadarma -g
 ```
