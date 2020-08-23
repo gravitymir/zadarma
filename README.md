@@ -1,4 +1,4 @@
-# zadarma-js-api
+# zadarma
 Module which help you work with API Zadarma (v1)
 
 ## Requirements:
