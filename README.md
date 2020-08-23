@@ -5,7 +5,7 @@ Module which help you work with API Zadarma (v1)
 - Node.js > 14.0.0
 
 ## How to use?
-An official documentation on Zadarma API is [here](https://zadarma.com/support/api/){:target="_blank"}.
+An official documentation on Zadarma API is [here](https://zadarma.com/support/api/).
 
 ## Getting Started
 
@@ -19,7 +19,7 @@ npm i zadarma
 npm install zadarma
 ```
 ## Authorization keys
-Page authorization keys: [here](https://my.zadarma.com/api/#){:target="_blank"}
+Page authorization keys: [here](https://my.zadarma.com/api/#)
 
 ## Usage examples
 ```js
@@ -80,7 +80,7 @@ let response = await z_api({
 console.log(response);
 ```
 
-#### http_method
+#### http_method "post"
 ```js
 //Example with http_method "post" for api_method "/v1/sms/send/"
 let from = '73919100000';//[optional]
