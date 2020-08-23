@@ -1,8 +1,9 @@
 # zadarma-js-api
-Class which help you work with API Zadarma (v1)
+Module which help you work with API Zadarma (v1)
 
 ## Requirements:
-- Node.js, JavaScript
+- Node.js
+- JavaScript
 
 ## How to use?
 An official documentation on Zadarma API is [here](https://zadarma.com/support/api/).
@@ -30,14 +31,35 @@ const {express_middleware_zadarma} = require("./v1/index.js");
 ```
 
 ```js
-let response;
-    response = await z_api({api_method: '/v1/info/balance/'});
+    const {api: z_api} = require("zadarma");
+    let response = await z_api({api_method: '/v1/info/balance/'});
     console.log(response);
+```
 
-    api_user_key = process.env.ZADARMA_USER_KEY,
-    api_secret_key = process.env.ZADARMA_SECRET_KEY
+#### Single account use
+```js
 
-    response = await z_api.request({
+    process.env.ZADARMA_USER_KEY = '11111111111111111111'
+    process.env.ZADARMA_SECRET_KEY = '11111111111111111111'
+    
+    let response = await z_api.request({
+        api_method: '/v1/tariff/'
+    });
+    console.log(response);
+```
+
+#### Multi account use
+```js
+    let response = await z_api.request({
+        api_method: '/v1/tariff/',
+        api_user_key: 'a248a6a984459935b569', 
+        api_secret_key: '8a8e91d214fb728889c7'
+    });
+    console.log(response);
+```
+
+
+let response = await z_api.request({
         api_method: '/v1/request/callback/',
         params: {
             from: '73919100000',
@@ -46,9 +68,7 @@ let response;
             predicted: 'predicted'
         }
     });
-console.log(response);
-```
-
+    console.log(response);
 
 
 
