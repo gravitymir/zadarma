@@ -13,16 +13,12 @@ An official documentation on Zadarma API is [here](https://zadarma.com/support/a
 ```shell
 npm i zadarma -g
 ```
+
 #### Require
 ```js
 const {api} = require("zadarma");
 //or
 const {api: z_api} = require("zadarma");
-```
-
-## Using with Express
-```js
-const {express_middleware_zadarma} = require("./v1/index.js");
 ```
 
 ```js
