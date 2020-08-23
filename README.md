@@ -14,7 +14,6 @@ An official documentation on Zadarma API is [here](https://zadarma.com/support/a
 npm i zadarma -g
 ```
 
-#### Require
 ```js
 const {api} = require("zadarma");
 //or
@@ -27,10 +26,10 @@ let response = await z_api({api_method: '/v1/info/balance/'});
 console.log(response);
 ```
 
-#### Single account use
+#### single account use
 ```js
-process.env.ZADARMA_USER_KEY = '11111111111111111111'
-process.env.ZADARMA_SECRET_KEY = '11111111111111111111'
+process.env.ZADARMA_USER_KEY = 'a248a6a984459935b569';//your user key
+process.env.ZADARMA_SECRET_KEY = '8a8e91d214fb728889c7';//your secret key
 
 let response = await z_api.request({
     api_method: '/v1/tariff/'
@@ -38,28 +37,46 @@ let response = await z_api.request({
 console.log(response);
 ```
 
-#### Multi account use
+#### multi account use
 ```js
+//send api_user_key && api_secret_key
 let response = await z_api.request({
     api_method: '/v1/tariff/',
-    api_user_key: 'a248a6a984459935b569', 
-    api_secret_key: '8a8e91d214fb728889c7'
+    api_user_key: 'a248a6a984459935b569',//your user key
+    api_secret_key: '8a8e91d214fb728889c7'//your secret key
 });
 console.log(response);
 ```
 
-
+#### parameters
+```js
+//Example with parameters
 let response = await z_api.request({
-        api_method: '/v1/request/callback/',
-        params: {
-            from: '73919100000',
-            to: '67200000000',
-            sip: '100',
-            predicted: 'predicted'
-        }
-    });
-    console.log(response);
+    api_method: '/v1/request/callback/',
+    params: {
+        from: '73919100000',
+        to: '67200000000',
+        sip: '100',
+        predicted: 'predicted'
+    }
+});
+console.log(response);
+```
 
+#### http_method
+```js
+//Example with http_method "post" for /sms/send/ method
+response = await z_api.request({
+    http_method: 'post',
+    api_method: '/v1/sms/send/',
+    params: {
+        caller_id: '73919100000',
+        number: '67200000000',
+        message: 'test sms 0987654321 тестовое смс'
+    }
+});
+console.log(response);
+```
 
 
 
