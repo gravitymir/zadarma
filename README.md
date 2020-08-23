@@ -14,7 +14,7 @@ An official documentation on Zadarma API is [here](https://zadarma.com/support/a
 npm i zadarma -g
 ```
 
-<code>npm i zadarma -g</code>
+<code>
 
 ```js
 const {api} = require("zadarma");
@@ -27,6 +27,7 @@ const {api: z_api} = require("zadarma");
 let response = await z_api({api_method: '/v1/info/balance/'});
 console.log(response);
 ```
+</code>
 
 #### single account use
 ```js
