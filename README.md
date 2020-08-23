@@ -105,6 +105,49 @@ console.log(response);
 let response = await z_api({api_method: '/v1/zcrm/customers'});
 console.log(response);
 ```
+```js
+let response = await z_api({
+        http_method: 'post',
+        api_method: '/v1/zcrm/customers/labels',
+        params: {
+            "name": "Good company",
+            "status": "company",
+            "type": "client",
+            "responsible_user_id": 20,
+            "employees_count": "50",
+            "comment": "",
+            "country": "GB",
+            "city": "London",
+            "address": "",
+            "zip": "",
+            "website": "",
+            "lead_source": "manual",
+            "phones": [
+            {
+                "type": "work",
+                "phone": "+44123456789"
+            }
+            ],
+            "contacts": [
+            {
+                "type": "email_work",
+                "value": "good_company@example.com"
+            }
+            ],
+            "labels": [
+                //{"id": 99938}
+            ],
+            "custom_properties": [
+            {
+                "id": 18,
+                "value": "high"
+            }
+            ]
+        }
+    });
+
+console.log(response);
+```
 
 
 

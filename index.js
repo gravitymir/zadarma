@@ -10,10 +10,67 @@ const {api: z_api} = require("./zadarma");
     console.log(response);
     response = await z_api({api_method: '/v1/zcrm/customers'});
     console.log(response);
+
+    
+    // response = await z_api({api_method: '/v1/zcrm/events'});
+    // console.log(response);
+
+    // response = await z_api({
+    //     http_method: 'post',
+    //     api_method: '/v1/zcrm/customers/labels',
+    //     params: {
+    //         name: 'new tag'
+    //     }
+
+    // });
+    // console.log(response);
+
+
+
+
+    response = await z_api({
+        http_method: 'post',
+        api_method: '/v1/zcrm/customers/labels',
+        params: {
+            "name": "new 2 name company",
+            "status": "company",
+            "type": "client",
+            "responsible_user_id": 20,
+            "employees_count": "50",
+            "comment": "",
+            "country": "GB",
+            "city": "London",
+            "address": "",
+            "zip": "",
+            "website": "",
+            "lead_source": "manual",
+            "phones": [
+            {
+                "type": "work",
+                "phone": "+44123456789"
+            }
+            ],
+            "contacts": [
+            {
+                "type": "email_work",
+                "value": "good_company@example.com"
+            }
+            ],
+            "labels": [
+                {"id": 99938}
+            ],
+            "custom_properties": [
+            {
+                "id": 18,
+                "value": "high"
+            }
+            ]
+        }
+    });
+    
+    console.log(response);
     
     /*
-    
-
     api_user_key = process.env.ZADARMA_USER_KEY,
     api_secret_key = process.env.ZADARMA_SECRET_KEY
 
@@ -27,17 +84,20 @@ const {api: z_api} = require("./zadarma");
         }
     });
     console.log(response);
+
     */
-    // response = await z_api({
-    //     http_method: 'post', 
-    //     api_method: '/v1/sms/send/',
-    //     params: {
-    //         caller_id: '73919100000',
-    //         number: '67200000000',
-    //         message: 'test sms 0987654321 тестовое смс'
-    //     }
-    // });
-    // console.log(response);
+   /*
+    response = await z_api({
+        http_method: 'post', 
+        api_method: '/v1/sms/send/',
+        params: {
+            caller_id: '73919100000',
+            number: '67200000000',
+            message: 'test sms 0987654321 тестовое смс'
+        }
+    });
+    console.log(response);
+    */
     /*
 
     response = await z_api({api_method: '/v1/info/timezone/'});
@@ -84,7 +144,6 @@ const {api: z_api} = require("./zadarma");
             caller_id: '73919100000'
         }
     });
-
     console.log(response);
     */
 }
