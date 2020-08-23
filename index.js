@@ -6,6 +6,8 @@ const {api: z_api} = require("./zadarma");
     let response;
     response = await z_api({api_method: '/v1/info/balance/'});
     console.log(response);
+    response = await z_api({api_method: '/v1/info/timezone/'});
+    console.log(response);
     
     /*
     
@@ -13,7 +15,7 @@ const {api: z_api} = require("./zadarma");
     api_user_key = process.env.ZADARMA_USER_KEY,
     api_secret_key = process.env.ZADARMA_SECRET_KEY
 
-    response = await z_api.request({
+    response = await z_api({
         api_method: '/v1/request/callback/',
         params: {
             from: '73919100000',
@@ -24,7 +26,7 @@ const {api: z_api} = require("./zadarma");
     });
     console.log(response);
     */
-    // response = await z_api.request({
+    // response = await z_api({
     //     http_method: 'post', 
     //     api_method: '/v1/sms/send/',
     //     params: {
@@ -36,16 +38,16 @@ const {api: z_api} = require("./zadarma");
     // console.log(response);
     /*
 
-    response = await z_api.request({api_method: '/v1/info/timezone/'});
+    response = await z_api({api_method: '/v1/info/timezone/'});
     console.log(response);
 
     process.env.ZADARMA_USER_KEY = 'a248a6a984459935b569';
     process.env.ZADARMA_SECRET_KEY = '8a8e91d214fb728889c7';
-    response = await z_api.request({api_method: '/v1/sip/'});
+    response = await z_api({api_method: '/v1/sip/'});
     console.log(response)
 
     //multi account use
-    response = await z_api.request({
+    response = await z_api({
         api_method: '/v1/tariff/',
         api_user_key: 'a248a6a984459935b569', 
         api_secret_key: '8a8e91d214fb728889c7'
@@ -54,16 +56,16 @@ const {api: z_api} = require("./zadarma");
 
     let sip_number = '886493';
 
-    response = await z_api.request({api_method: '/v1/sip/${sip_number}/status/'});
+    response = await z_api({api_method: '/v1/sip/${sip_number}/status/'});
     console.log(response);
 
-    response = await z_api.request({api_method: '/v1/direct_numbers/'});
+    response = await z_api({api_method: '/v1/direct_numbers/'});
     console.log(response);
 
-    response = await z_api.request({api_method: '/v1/zcrm/customers'});
+    response = await z_api({api_method: '/v1/zcrm/customers'});
     console.log(response);
 
-    response = await z_api.request({
+    response = await z_api({
         http_method: 'dalete',
         api_method: '/v1/zcrm/customers/c_id',
         params: {
@@ -72,7 +74,7 @@ const {api: z_api} = require("./zadarma");
     });
     console.log(response)
 
-    response = await z_api.request({
+    response = await z_api({
         //http_mathod: 'get', [default]
         api_method: '/v1/info/price/',
         params: {
