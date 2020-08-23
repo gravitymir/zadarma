@@ -64,13 +64,16 @@ console.log(response);
 
 #### http_method
 ```js
-//Example with http_method "post" for /sms/send/ method
-response = await z_api.request({
+//Example with http_method "post" for api_method "/v1/sms/send/"
+let from = '73919100000';
+let to = '67200000000';
+
+let response = await z_api.request({
     http_method: 'post',
     api_method: '/v1/sms/send/',
     params: {
-        caller_id: '73919100000',
-        number: '67200000000',
+        caller_id: from,
+        number: to,
         message: 'test sms 0987654321\nтестовый текст'
     }
 });
