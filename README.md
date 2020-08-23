@@ -42,15 +42,15 @@ console.log(response);
 let response = await z_api.request({
     api_method: '/v1/tariff/',
     api_user_key: 'a248a6a984459935b569',//your user key
-    api_secret_key: '8a8e91d214fb728889c7'//your secret key
+    api_secret_key: '8a8e91d214fb728889c7'//your secret key https://my.zadarma.com/api/#
 });
 console.log(response);
 ```
 ```js
 const {api: z_api} = require("zadarma");
 let method = '/v1/tariff/';
-let user_key = 'a248a6a984459935b569';//your user key
-let secret_key = '8a8e91d214fb728889c7';//your secret key
+let user_key = 'your user key'; //Authorization keys
+let secret_key = 'your secret key'; //https://my.zadarma.com/api/#
 
 let response = await z_api.request({
     api_method: method,
