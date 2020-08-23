@@ -46,6 +46,19 @@ let response = await z_api.request({
 });
 console.log(response);
 ```
+```js
+const {api: z_api} = require("zadarma");
+let method = '/v1/tariff/';
+let user_key = 'a248a6a984459935b569';//your user key
+let secret_key = '8a8e91d214fb728889c7';//your secret key
+
+let response = await z_api.request({
+    api_method: method,
+    api_user_key: user_key,
+    api_secret_key: secret_key
+});
+console.log(response);
+```
 
 #### parameters
 ```js
