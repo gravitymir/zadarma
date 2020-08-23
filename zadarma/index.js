@@ -55,7 +55,6 @@ module.exports.api = async function request(...args){
     });
 
     return new Promise(resolve => {
-
         axios({
             method: http_method,
             url: http_method.toLowerCase() === 'get' ? api_method + '?' + params_string: api_method,
@@ -66,7 +65,7 @@ module.exports.api = async function request(...args){
             resolve(response.data);
         })
         .catch(error => {
-            resolve(error.response.data);
+            resolve(error?.response?.data || error);
         });
     });
 };

@@ -53,6 +53,7 @@ console.log(response);
 ```
 ```js
 const {api: z_api} = require("zadarma");
+
 let method = '/v1/tariff/';
 let user_key = 'your_user_key';
 let secret_key = 'your_secret_key';
@@ -83,7 +84,7 @@ console.log(response);
 #### http_method "post"
 ```js
 //Example with http_method "post" for api_method "/v1/sms/send/"
-let from = '73919100000';//[optional]
+let from = '73919100000';
 let to = '67200000000';
 let message = 'test sms 0987654321\nтестовый текст';
 
@@ -96,6 +97,12 @@ let response = await z_api({
         message: message
     }
 });
+console.log(response);
+```
+
+#### zcrm methods
+```js
+let response = await z_api({api_method: '/v1/zcrm/customers'});
 console.log(response);
 ```
 

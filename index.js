@@ -8,6 +8,8 @@ const {api: z_api} = require("./zadarma");
     console.log(response);
     response = await z_api({api_method: '/v1/info/timezone/'});
     console.log(response);
+    response = await z_api({api_method: '/v1/zcrm/customers'});
+    console.log(response);
     
     /*
     
