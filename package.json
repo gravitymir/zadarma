@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "crypto": "^1.0.1"
+    "crypto": "^1.0.1",
+    "http-build-query": "^0.7.0",
+    "nodejs-base64": "^1.0.3"
   },
   "repository": {
     "type": "git",

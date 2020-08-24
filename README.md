@@ -84,12 +84,12 @@ console.log(response);
 #### http_method "post"
 ```js
 //Example with http_method "post" for api_method "/v1/sms/send/"
-let from = '73919100000';
+let from = '67200000000';//[optional] your verified phone number
 let to = '67200000000';
 let message = 'test sms 0987654321\nтестовый текст';
 
 let response = await z_api({
-    http_method: 'post',
+    http_method: 'POST',
     api_method: '/v1/sms/send/',
     params: {
         caller_id: from,//[optional]
@@ -97,7 +97,6 @@ let response = await z_api({
         message: message
     }
 });
-console.log(response);
 ```
 
 #### zcrm methods
@@ -107,46 +106,40 @@ console.log(response);
 ```
 ```js
 let response = await z_api({
-        http_method: 'post',
-        api_method: '/v1/zcrm/customers/labels',
+        http_method: 'POST',
+        api_method: '/v1/zcrm/customers',
         params: {
-            "name": "Good company",
-            "status": "company",
-            "type": "client",
-            "responsible_user_id": 20,
-            "employees_count": "50",
-            "comment": "",
-            "country": "GB",
-            "city": "London",
-            "address": "",
-            "zip": "",
-            "website": "",
-            "lead_source": "manual",
-            "phones": [
-            {
-                "type": "work",
-                "phone": "+44123456789"
+            customer: {
+                "name": "Good company 32",
+                "status": "company",
+                "type": "client",
+                "responsible_user_id": "",
+                "employees_count": "50",
+                "comment": "",
+                "country": "GB",
+                "city": "London",
+                "address": "",
+                "zip": "",
+                "website": "",
+                "lead_source": "manual",
+                "phones": [
+                  {
+                    "type": "work",
+                    "phone": "+44123456100"
+                  }
+                ],
+                "contacts": [
+                  {
+                    "type": "email_work",
+                    "value": "good_company@example.com"
+                  }
+                ],
+                "labels": [],
+                "custom_properties": []
             }
-            ],
-            "contacts": [
-            {
-                "type": "email_work",
-                "value": "good_company@example.com"
-            }
-            ],
-            "labels": [
-                //{"id": 99938}
-            ],
-            "custom_properties": [
-            {
-                "id": 18,
-                "value": "high"
-            }
-            ]
         }
     });
-
-console.log(response);
+    console.log(response);
 ```
 
 
