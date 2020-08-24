@@ -100,12 +100,14 @@ let response = await z_api({
 console.log(response);
 ```
 
-#### zcrm methods
+#### zcrm methods examples
 ```js
+//example get all customers
 let response = await z_api({api_method: '/v1/zcrm/customers'});
 console.log(response);
 ```
 ```js
+//example create customer
 let response = await z_api({
     http_method: 'POST',
     api_method: '/v1/zcrm/customers',
@@ -143,6 +145,8 @@ let response = await z_api({
 console.log(response);
 ```
 ```js
+//example create, get, delete customers
+
 //create labal 1
 let response = await z_api({
     http_method: 'POST',
