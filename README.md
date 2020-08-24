@@ -1,33 +1,37 @@
 # zadarma
+
 Module which help you work with API Zadarma (v1)
 
 ## Requirements:
-- Node.js > 14.0.0
+
+* Node.js > 14.0.0
 
 ## How to use?
+
 An official documentation on Zadarma API is [here](https://zadarma.com/support/api/).
 
 ## Getting Started
 
 #### Install
 
-```shell
-npm i zadarma -g
-#or
-npm i zadarma
-#or
+``` shell
+#npm
 npm install zadarma
 ```
+
 ## Authorization keys
+
 Page authorization keys: [here](https://my.zadarma.com/api/#)
 
 ## Usage examples
-```js
+
+``` js
 const {api} = require("zadarma");
 ```
 
 #### single account use
-```js
+
+``` js
 //Example configure default config
 process.env.ZADARMA_USER_KEY = 'a248a6a984459935b569';//your user key
 process.env.ZADARMA_SECRET_KEY = '8a8e91d214fb728889c7';//your secret key
@@ -41,20 +45,22 @@ console.log(balance);
 ```
 
 #### multi account use
-```js
+
+``` js
 //Example with send "api_user_key" && "api_secret_key"
 const {api: z_api} = require("zadarma");
 let response = await z_api({
-    api_method: '/v1/tariff/',
-    api_user_key: 'a248a6a984459935b569',//your user key
-    api_secret_key: '8a8e91d214fb728889c7'//your secret key
+    api_method: '/v1/direct_numbers/',
+    api_user_key: 'a248a6a984459935b569', //your user key
+    api_secret_key: '8a8e91d214fb728889c7' //your secret key
 });
 console.log(response);
 ```
-```js
+
+``` js
 const {api: z_api} = require("zadarma");
 
-let method = '/v1/tariff/';
+let method = '/v1/pbx/internal/';
 let user_key = 'your_user_key';
 let secret_key = 'your_secret_key';
 
@@ -67,7 +73,8 @@ console.log(response);
 ```
 
 #### parameters
-```js
+
+``` js
 //Example with parameters
 let response = await z_api({
     api_method: '/v1/request/callback/',
@@ -82,9 +89,10 @@ console.log(response);
 ```
 
 #### http_method "post"
-```js
+
+``` js
 //Example with http_method "post" for api_method "/v1/sms/send/"
-let from = '67200000000';//[optional] your verified phone number
+let from = '67200000000'; //[optional] your verified phone number
 let to = '67200000000';
 let message = 'test sms 0987654321\nтестовый текст';
 
@@ -92,7 +100,7 @@ let response = await z_api({
     http_method: 'POST',
     api_method: '/v1/sms/send/',
     params: {
-        caller_id: from,//[optional]
+        caller_id: from, //[optional]
         number: to,
         message: message
     }
@@ -101,12 +109,16 @@ console.log(response);
 ```
 
 #### zcrm methods examples
-```js
+
+``` js
 //example get all customers
-let response = await z_api({api_method: '/v1/zcrm/customers'});
+let response = await z_api({
+    api_method: '/v1/zcrm/customers'
+});
 console.log(response);
 ```
-```js
+
+``` js
 //example create customer
 let response = await z_api({
     http_method: 'POST',
@@ -125,18 +137,14 @@ let response = await z_api({
             "zip": "",
             "website": "",
             "lead_source": "manual",
-            "phones": [
-                {
+            "phones": [{
                 "type": "work",
                 "phone": "+44123456100"
-                }
-            ],
-            "contacts": [
-                {
+            }],
+            "contacts": [{
                 "type": "email_work",
                 "value": "good_company@example.com"
-                }
-            ],
+            }],
             "labels": [],
             "custom_properties": []
         }
@@ -144,7 +152,8 @@ let response = await z_api({
 });
 console.log(response);
 ```
-```js
+
+``` js
 //example create, get, delete customers
 
 //create labal 1
@@ -171,13 +180,13 @@ response = await z_api({
 });
 console.log(response.data.labels);
 
-for(label of response.data.labels){
+for (label of response.data.labels) {
     //delete label
     response = await z_api({
         http_method: 'DELETE',
         api_method: `/v1/zcrm/customers/labels/${label.id}`
     });
-    console.log(`label id ${label.id} deleted!`);
+    console.log( `label id ${label.id} deleted!` );
 }
 
 //get all labels

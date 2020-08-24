@@ -1,47 +1,56 @@
 require("./process.env.js");
-const {api} = require("./zadarma");
-const {api: z_api} = require("./zadarma");
+const { api } = require("./zadarma");
+const { api: z_api } = require("./zadarma");
 
-(async function(){
-    let response;
-    
-    response = await z_api({
-        http_method: 'POST',
-        api_method: '/v1/zcrm/customers/labels',
-        params: {
-            name: 'label 1'
-        }
+(async function () {
+
+
+    let response = await z_api({
+        api_method: '/v1/pbx/internal/'
     });
+    console.log(response);
 
-    response = await z_api({
-        http_method: 'POST',
-        api_method: '/v1/zcrm/customers/labels',
-        params: {
-            name: 'label 2'
-        }
-    });
 
-    response = await z_api({
-        api_method: '/v1/zcrm/customers/labels'
-    });
-    
-    console.log(response.data.labels);
 
-    for(label of response.data.labels){
+    // let response;
 
-        response = await z_api({
-            http_method: 'DELETE',
-            api_method: `/v1/zcrm/customers/labels/${label.id}`
-        });
+    // response = await z_api({
+    //     http_method: 'POST',
+    //     api_method: '/v1/zcrm/customers/labels',
+    //     params: {
+    //         name: 'label 1'
+    //     }
+    // });
 
-        console.log(`label id ${label.id} deleted!`);
-    }
+    // response = await z_api({
+    //     http_method: 'POST',
+    //     api_method: '/v1/zcrm/customers/labels',
+    //     params: {
+    //         name: 'label 2'
+    //     }
+    // });
 
-    response = await z_api({
-        api_method: '/v1/zcrm/customers/labels'
-    });
-    
-    console.log(response.data.labels);
+    // response = await z_api({
+    //     api_method: '/v1/zcrm/customers/labels'
+    // });
+
+    // console.log(response.data.labels);
+
+    // for(label of response.data.labels){
+
+    //     response = await z_api({
+    //         http_method: 'DELETE',
+    //         api_method: `/v1/zcrm/customers/labels/${label.id}`
+    //     });
+
+    //     console.log(`label id ${label.id} deleted!`);
+    // }
+
+    // response = await z_api({
+    //     api_method: '/v1/zcrm/customers/labels'
+    // });
+
+    // console.log(response.data.labels);
 
 
     // response = await z_api({
@@ -83,7 +92,7 @@ const {api: z_api} = require("./zadarma");
     //     }
     // });
     // console.log(response);
-    
+
     // response = await z_api({api_method: '/v1/info/balance/'});
     // console.log(response);
     // response = await z_api({api_method: '/v1/info/timezone/'});
@@ -101,9 +110,9 @@ const {api: z_api} = require("./zadarma");
     //         "name": "te st"
     //     }
     // });
-    
+
     // console.log(response);
-    
+
     /*
     api_user_key = process.env.ZADARMA_USER_KEY,
     api_secret_key = process.env.ZADARMA_SECRET_KEY
@@ -120,18 +129,18 @@ const {api: z_api} = require("./zadarma");
     console.log(response);
 
     */
-   /*
-    response = await z_api({
-        http_method: 'post', 
-        api_method: '/v1/sms/send/',
-        params: {
-            caller_id: '73919100000',
-            number: '67200000000',
-            message: 'test sms 0987654321 тестовое смс'
-        }
-    });
-    console.log(response);
-    */
+    /*
+     response = await z_api({
+         http_method: 'post', 
+         api_method: '/v1/sms/send/',
+         params: {
+             caller_id: '73919100000',
+             number: '67200000000',
+             message: 'test sms 0987654321 тестовое смс'
+         }
+     });
+     console.log(response);
+     */
     /*
 
     response = await z_api({api_method: '/v1/info/timezone/'});
@@ -181,7 +190,7 @@ const {api: z_api} = require("./zadarma");
     console.log(response);
     */
 
-    
+
 }
 )();
 ;
