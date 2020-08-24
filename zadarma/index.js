@@ -15,10 +15,9 @@ const crypto = require('crypto');
 const httpBuildQuery = require('http-build-query');
 
 const params_sort = function params_sort(obj){
-    let ordered = {};
-    Object.keys(obj).sort(/*(a, b) => a === b ? 0 : a > b ? 1 : -1*/)
-    .forEach(key => ordered[key] = obj[key]);
-    return ordered;
+    let sorted = {};
+    Object.keys(obj).sort().forEach(key => sorted[key] = obj[key]);
+    return sorted;
 } 
 
 const prepare = function prepare(...args){
@@ -41,10 +40,10 @@ const prepare = function prepare(...args){
 
     let data = api_method + params_string + md5;
 
-    let hex = crypto.createHmac('sha1', api_secret_key)
+    let sha1 = crypto.createHmac('sha1', api_secret_key)
         .update(data).digest('hex');
 
-    let sign = Buffer.from(hex).toString('base64');
+    let sign = Buffer.from(sha1).toString('base64');
 
     return {
         headers: {"Authorization": `${api_user_key}:${sign}`},
@@ -52,17 +51,6 @@ const prepare = function prepare(...args){
     }
 }
 
-/*
-"""
-    Function for send API request
-    :param method: API method, including version number
-    :param params: Query params
-    :param request_type: (get|post|put|delete)
-    :param format: (json|xml)
-    :param is_auth: (True|False)
-    :return: response
-"""
-*/ 
 module.exports.api = async function request(...args){
     let {api_method, params, http_method = 'GET'} = args.shift();
 
