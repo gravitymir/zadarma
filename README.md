@@ -97,6 +97,7 @@ let response = await z_api({
         message: message
     }
 });
+console.log(response);
 ```
 
 #### zcrm methods
@@ -106,42 +107,43 @@ console.log(response);
 ```
 ```js
 let response = await z_api({
-        http_method: 'POST',
-        api_method: '/v1/zcrm/customers',
-        params: {
-            customer: {
-                "name": "Good company 32",
-                "status": "company",
-                "type": "client",
-                "responsible_user_id": "",
-                "employees_count": "50",
-                "comment": "",
-                "country": "GB",
-                "city": "London",
-                "address": "",
-                "zip": "",
-                "website": "",
-                "lead_source": "manual",
-                "phones": [
-                  {
-                    "type": "work",
-                    "phone": "+44123456100"
-                  }
-                ],
-                "contacts": [
-                  {
-                    "type": "email_work",
-                    "value": "good_company@example.com"
-                  }
-                ],
-                "labels": [],
-                "custom_properties": []
-            }
+    http_method: 'POST',
+    api_method: '/v1/zcrm/customers',
+    params: {
+        customer: {
+            "name": "Good company 32",
+            "status": "company",
+            "type": "client",
+            "responsible_user_id": "",
+            "employees_count": "50",
+            "comment": "",
+            "country": "GB",
+            "city": "London",
+            "address": "",
+            "zip": "",
+            "website": "",
+            "lead_source": "manual",
+            "phones": [
+                {
+                "type": "work",
+                "phone": "+44123456100"
+                }
+            ],
+            "contacts": [
+                {
+                "type": "email_work",
+                "value": "good_company@example.com"
+                }
+            ],
+            "labels": [],
+            "custom_properties": []
         }
-    });
-    console.log(response);
+    }
+});
+console.log(response);
 ```
 ```js
+//create labal 1
 let response = await z_api({
     http_method: 'POST',
     api_method: '/v1/zcrm/customers/labels',
@@ -150,6 +152,7 @@ let response = await z_api({
     }
 });
 
+//create label 2
 response = await z_api({
     http_method: 'POST',
     api_method: '/v1/zcrm/customers/labels',
@@ -158,28 +161,24 @@ response = await z_api({
     }
 });
 
+//get all labels
 response = await z_api({
     api_method: '/v1/zcrm/customers/labels'
 });
-
 console.log(response.data.labels);
 
 for(label of response.data.labels){
-
+    //delete label
     response = await z_api({
         http_method: 'DELETE',
         api_method: `/v1/zcrm/customers/labels/${label.id}`
     });
-
     console.log(`label id ${label.id} deleted!`);
 }
 
+//get all labels
 response = await z_api({
     api_method: '/v1/zcrm/customers/labels'
 });
-
 console.log(response.data.labels);
 ```
-
-
-
