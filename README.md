@@ -141,6 +141,45 @@ let response = await z_api({
     });
     console.log(response);
 ```
+```js
+let response = await z_api({
+    http_method: 'POST',
+    api_method: '/v1/zcrm/customers/labels',
+    params: {
+        name: 'label 1'
+    }
+});
+
+response = await z_api({
+    http_method: 'POST',
+    api_method: '/v1/zcrm/customers/labels',
+    params: {
+        name: 'label 2'
+    }
+});
+
+response = await z_api({
+    api_method: '/v1/zcrm/customers/labels'
+});
+
+console.log(response.data.labels);
+
+for(label of response.data.labels){
+
+    response = await z_api({
+        http_method: 'DELETE',
+        api_method: `/v1/zcrm/customers/labels/${label.id}`
+    });
+
+    console.log(`label id ${label.id} deleted!`);
+}
+
+response = await z_api({
+    api_method: '/v1/zcrm/customers/labels'
+});
+
+console.log(response.data.labels);
+```
 
 
 

@@ -3,54 +3,22 @@ const {api} = require("./zadarma");
 const {api: z_api} = require("./zadarma");
 
 (async function(){
-let to = '+380989897908';
-let message = 'test sms 0987654321\nтестовый текст';
+    let response;
+    
+    
 
-let response = await z_api({
-    http_method: 'POST',
-    api_method: '/v1/sms/send/',
-    params: {
-        number: to,
-        message: message
-    }
-});
-console.log(response);
-    response;
-    response = await z_api({
-        http_method: 'post',
-        api_method: '/v1/zcrm/customers',
-        params: {
-            customer: {
-                "name": "Good company 32",
-                "status": "company",
-                "type": "client",
-                "responsible_user_id": "",
-                "employees_count": "50",
-                "comment": "",
-                "country": "GB",
-                "city": "London",
-                "address": "",
-                "zip": "",
-                "website": "",
-                "lead_source": "manual",
-                "phones": [
-                  {
-                    "type": "work",
-                    "phone": "+44123456100"
-                  }
-                ],
-                "contacts": [
-                  {
-                    "type": "email_work",
-                    "value": "good_company@example.com"
-                  }
-                ],
-                "labels": [],
-                "custom_properties": []
-            }
-        }
-    });
-    console.log(response);
+
+
+
+
+
+    // response = await z_api({
+    //     http_method: 'post',
+    //     api_method: '/v1/zcrm/customers/labels',
+    //     params: {
+    //         name: 'label tag 2'
+    //     }
+    // });
 
     // response = await z_api({
     //     api_method: '/v1/request/callback/',
@@ -92,16 +60,7 @@ console.log(response);
     // console.log(response.data);
 
     // response = await z_api({api_method: '/v1/zcrm/events'});
-    // console.log(response);
-
-    // response = await z_api({
-    //     http_method: 'post',
-    //     api_method: '/v1/zcrm/customers/labels',
-    //     params: {
-    //         name: 'new tag'
-    //     }
-    // });
-    // console.log(response);
+    // console.log(response);    
 
     // response = await z_api({
     //     http_method: 'post',
@@ -189,10 +148,6 @@ console.log(response);
     });
     console.log(response);
     */
-
-
-
-
 
     
 }
