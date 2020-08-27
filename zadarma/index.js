@@ -23,7 +23,7 @@ const params_sort = function params_sort(obj) {
   return sorted;
 }
 
-const prepare = function prepare(...args) {
+const prepare_data_to_request = function prepare_data_to_request(...args) {
   let {
     api_method,
     params = {},
@@ -57,7 +57,7 @@ const prepare = function prepare(...args) {
 module.exports.api = async function request(...args) {
   let { api_method, params, http_method = 'GET' } = args.shift();
 
-  let { headers, params_string } = prepare({
+  let { headers, params_string } = prepare_data_to_request({
     api_method: api_method,
     params: params
   });
@@ -71,13 +71,10 @@ module.exports.api = async function request(...args) {
       headers: headers
     }).then(response => {
       resolve(response.data);
-    })
-      .catch(error => {
-        resolve(error?.response?.data || error);
-      });
+    }).catch(error => {
+      resolve(error?.response?.data || error);
+    });
   });
 };
 
-module.exports.zemh = async function zadarma_express_middleware_handler(req, res, next) {
-
-}
+module.exports.express = require('./express_handler');
