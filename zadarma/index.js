@@ -77,4 +77,4 @@ module.exports.api = async function request(...args) {
   });
 };
 
-module.exports.express = require('./express_handler');
+module.exports.zadarma_express_handler = require('./zadarma_express_handler');
