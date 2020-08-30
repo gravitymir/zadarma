@@ -8,14 +8,35 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
 zadarma_express_handler.on('NOTIFY_START', function(ctx){
-    console.log(ctx);
+    //console.log(ctx);
 });
+zadarma_express_handler.on('NOTIFY_END', function(ctx){
+    //console.log(ctx);
+});
+zadarma_express_handler.on('NOTIFY_OUT_START', function(ctx){
+    //console.log(ctx);
+});
+zadarma_express_handler.on('NOTIFY_OUT_END', function(ctx){
+    //console.log(ctx);
+});
+
+zadarma_express_handler.set_api_secret_key(process.env.ZADARMA_SECRET_KEY);
 
 //console.log(zadarma_express_handler);
 
 app.use('/zadarma', zadarma_express_handler);
 app.listen(3000);
 
+
+let f = {
+    a: function(){
+        console.log('asd');
+    }
+}
+
+
+f['s']?.()
+f['a']?.()
 // (async function () {
 
 
