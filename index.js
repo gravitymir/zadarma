@@ -1,11 +1,19 @@
 require("./process.env.js");
 const { zadarma_express_handler } = require("./zadarma");
+const formidable = require('express-formidable');
+
 const { api: z_api } = require("./zadarma");
 const express = require('express');
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(function(req, res, next){
+  console.log('---------------cetch---------------');
+  next();
+});
+
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(formidable());
 
 zadarma_express_handler.on('NOTIFY_START', function(ctx){
     //console.log(ctx);
@@ -19,31 +27,25 @@ zadarma_express_handler.on('NOTIFY_OUT_START', function(ctx){
 zadarma_express_handler.on('NOTIFY_OUT_END', function(ctx){
     //console.log(ctx);
 });
+zadarma_express_handler.on('NOTIFY_RECORD', function(ctx){
+    //console.log(ctx);
+});
+zadarma_express_handler.on('SMS', function(ctx){
+    console.log(ctx);
+});
 
 zadarma_express_handler.set_api_secret_key(process.env.ZADARMA_SECRET_KEY);
 
-//console.log(zadarma_express_handler);
+console.log(zadarma_express_handler);
 
 app.use('/zadarma', zadarma_express_handler);
 app.listen(3000);
 
-
-let f = {
-    a: function(){
-        console.log('asd');
-    }
-}
-
-
-f['s']?.()
-f['a']?.()
 // (async function () {
-
 
 // }
 // )();
 // ;
-
 
 // class E {
 //   constructor(){

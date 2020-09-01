@@ -12,6 +12,32 @@ const verify_ip = function verify_ip(req) {
   return '185.45.152.42' === (req?.headers['x-forwarded-for'] || req?.connection?.remoteAddress.split(':').pop());
 }
 
+const parse_incoming_data_to_body_obj = function parse_incoming_data_to_body_obj(req) {
+  return new Promise(function(resolve, reject){
+    let data = '';
+
+    req.on('data', function(chunk){
+      data += chunk;
+    })
+    
+    req.on('end', function(){
+      let str = data.toString('utf-8');
+      let array_pre_obj = str.split('&').map(i => i.split('='));
+      
+      resolve(Object.fromEntries(array_pre_obj));
+    })
+
+    req.on('error', function(error){
+      console.error(error);
+      reject({});
+    });
+  });
+}
+
+const check_zd_echo = function check_zd_echo(req) {
+  return !!req.body?.zd_echo
+}
+
 const verify_data = function verify_data(data_string, signature) {
 
   let sha1 = crypto.createHmac('sha1', api_secret_key)
@@ -22,8 +48,8 @@ const verify_data = function verify_data(data_string, signature) {
 
 const zadarma_events_list = [
   'NOTIFY_START',
-  'NOTIFY_INTERNAL',//method not implemented
-  'NOTIFY_ANSWER',//method not implemented
+  'NOTIFY_INTERNAL',
+  'NOTIFY_ANSWER',
   'NOTIFY_END',
   'NOTIFY_OUT_START',
   'NOTIFY_OUT_END',
@@ -35,26 +61,12 @@ const zadarma_events_list = [
   'SMS'
 ];
 
-const temporary_storage = {};
-const user_handlers = {};
-
-const z_log = function(ctx, data){
-  console.log(data);
-  console.log(`Zadarma event ${data.event} from ${ctx.from} to ${ctx.to} verify: ${ctx.verify}`);
-
-}
-
 const handlers = {
   'NOTIFY_START': function NOTIFY_START(data, signature){
-
-    let [direction] = data.pbx_call_id.split('_');
 
     temporary_storage[data.pbx_call_id] = {
       event: [data.event],
       pbx_call_id: data.pbx_call_id,
-      id: data.pbx_call_id,
-      direction: direction,
-      start: data.call_start,
       call_start: data.call_start,
       from: data.caller_id,
       to: data.called_did,
@@ -66,8 +78,7 @@ const handlers = {
   'NOTIFY_END': function NOTIFY_END(data, signature){
     temporary_storage[data.pbx_call_id].event.push(data.event);
     
-    let response = Object.assign(
-      {},
+    Object.assign(
       temporary_storage[data.pbx_call_id],
       {
         duration: data.duration,
@@ -78,20 +89,13 @@ const handlers = {
         verify: verify_data(`${data.caller_id}${data.called_did}${data.call_start}`, signature)
       }  
     );
-
-    delete temporary_storage[data.pbx_call_id];
-    return response;
+    return temporary_storage[data.pbx_call_id];
   },
   'NOTIFY_OUT_START': function NOTIFY_OUT_START(data, signature){
-
-    let [direction] = data.pbx_call_id.split('_');
 
     temporary_storage[data.pbx_call_id] = {
       event: [data.event],
       pbx_call_id: data.pbx_call_id,
-      id: data.pbx_call_id,
-      direction: direction,
-      start: data.call_start,
       call_start: data.call_start,
       internal: data.internal,
       caller_id: data.caller_id,
@@ -108,8 +112,7 @@ const handlers = {
 
     temporary_storage[data.pbx_call_id].event.push(data.event);
 
-    let response = Object.assign(
-      {},
+    Object.assign(
       temporary_storage[data.pbx_call_id],
       {
         duration: data.duration,
@@ -122,74 +125,78 @@ const handlers = {
       }
     );
 
-    if(data.is_recorded && parseInt(data.duration)){
-      return response;
-    }
-    delete temporary_storage[data.pbx_call_id];
-    return response;
+    return temporary_storage[data.pbx_call_id]
   },
   'NOTIFY_INTERNAL': function NOTIFY_INTERNAL(data, signature){
-    temporary_storage[data.pbx_call_id] = Object.assign(
-      temporary_storage[data.pbx_call_id],
-      {
-        event: temporary_storage[data.pbx_call_id].event.push(data.event),
-        internal: data.internal,
-        verify: verify_data(`${data.caller_id}${data.called_did}${data.call_start}`, signature)
-      }
-    );
+
+    temporary_storage[data.pbx_call_id].event.push(data.event)
+    temporary_storage[data.pbx_call_id].internal = data.internal;
+    temporary_storage[data.pbx_call_id].verify = verify_data(`${data.caller_id}${data.called_did}${data.call_start}`, signature)
+
     return temporary_storage[data.pbx_call_id];
   },
 
   'NOTIFY_ANSWER': function NOTIFY_INTERNAL(data, signature){
-    temporary_storage[data.pbx_call_id] = Object.assign(
-      temporary_storage[data.pbx_call_id],
-      {
-        event: temporary_storage[data.pbx_call_id].event.push(data.event),
-        internal: data.internal,
-        destination: data.destination,
-        dst_e164: data.dst_e164,
-        verify: verify_data(`${data.caller_id}${data.destination}${data.call_start}`, signature)
-      }
-    );
+
+    temporary_storage[data.pbx_call_id].event.push(data.event);
+    temporary_storage[data.pbx_call_id].internal = data.internal;
+    temporary_storage[data.pbx_call_id].destination = data.destination;
+    temporary_storage[data.pbx_call_id].dst_e164 = data.dst_e164;
+    temporary_storage[data.pbx_call_id].verify = verify_data(`${data.caller_id}${data.destination}${data.call_start}`, signature);
+
     return temporary_storage[data.pbx_call_id];
   },
 
   'NOTIFY_RECORD': function NOTIFY_RECORD(data, signature){
+    
     temporary_storage[data.pbx_call_id].event.push(data.event);
     temporary_storage[data.pbx_call_id].call_id_with_rec = data.call_id_with_rec;
     temporary_storage[data.pbx_call_id].verify = verify_data(`${data.pbx_call_id}${data.call_id_with_rec}`, signature);
+    
+    return temporary_storage[data.pbx_call_id]
+  },
+  'SMS': function SMS(data, signature){
+    
+    const result = JSON.parse(data.result);
 
-    let response = Object.assign(
-      {},
-      temporary_storage[data.pbx_call_id]
-    );
-
-    delete temporary_storage[data.pbx_call_id];
-    return response;
+    return {
+      event: data.event,
+      caller_id: result.caller_id,
+      caller_did: result.caller_did,
+      from: result.caller_id,
+      to: result.caller_did,
+      verify: verify_data(`${data.result}`, signature)
+    };
   }
 }
 
-const entry_handler = function entry_handler({body: data, headers}){
-  const ctx = handlers[data.event](data, headers.signature);
+const temporary_storage = {};
+const user_handlers = {};
+
+const zadarma_express_handler = async function zadarma_express_handler(req, res){
+  if(!verify_ip(req)){
+    return res.end()
+  }
   
-  z_log(ctx, data);
+  console.log('req.query', !!Object.keys(req.query).length, req.query);
 
-  if(typeof user_handlers[data.event] === 'function'){
-    return user_handlers[data.event](ctx);
+  if(Object.keys(req.query).length){
+    req.body = req.query;
+  }else{
+    req.body = await parse_incoming_data_to_body_obj(req);
   }
-}
 
-const zadarma_express_handler = function zadarma_express_handler(req, res){
-  if (!verify_ip(req)) {
-    return res.end();
-  } else if (req.body?.zd_echo) {
+  if(check_zd_echo(req)){
     //zadarma api performance check
     console.log('the api zadarma checks the un with an echo request');
     return res.end(req.body.zd_echo);
   }
-  res.end();
-  
-  return entry_handler(req);
+
+  const ctx = handlers[req.body.event](req.body, req.headers.signature);
+
+  if(typeof user_handlers[req.body.event] === 'function'){
+    return user_handlers[req.body.event](ctx);
+  }
 }
 
 zadarma_express_handler.on = function on(event_name, user_callback_function){
@@ -205,5 +212,15 @@ zadarma_express_handler.set_api_secret_key = function set_api_secret_key(key){
   api_secret_key = key;
 }
 
+zadarma_express_handler.clear_temporary_storage = function clear_temporary_storage(id){
+  if(id){
+    delete temporary_storage[id]
+  }else{
+    temporary_storage = {};
+  }
+}
+zadarma_express_handler.get_temporary_storage = function get_temporary_storage(){
+  return temporary_storage;
+}
 
 module.exports = zadarma_express_handler;
