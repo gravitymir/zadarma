@@ -13,21 +13,46 @@ const verify_ip = function verify_ip(req) {
 }
 
 const parse_incoming_data_to_body_obj = function parse_incoming_data_to_body_obj(req) {
-  return new Promise(function(resolve, reject){
-    let data = '';
+  return new Promise(function (resolve, reject) {
+    let incoming_data = '';
 
-    req.on('data', function(chunk){
-      data += chunk;
-    })
-    
-    req.on('end', function(){
-      let str = data.toString('utf-8');
-      let array_pre_obj = str.split('&').map(i => i.split('='));
-      
-      resolve(Object.fromEntries(array_pre_obj));
+    req.on('data', function (chunk) {
+      incoming_data += chunk;
     })
 
-    req.on('error', function(error){
+    req.on('end', function () {
+      let data_string = incoming_data.toString('utf-8');
+
+      if (req.headers['content-type'].includes('application/x-www-form-urlencoded')) {
+        let array_pre_obj = data_string.split('&').map(i => {
+          i = i.split('=');
+          i[1] = decodeURIComponent(i[1]);
+          return i;
+        });
+        resolve(Object.fromEntries(array_pre_obj));
+      } else if (req.headers['content-type'].includes('multipart/form-data')) {
+
+        let obj = {};
+        let boundary = req.headers['content-type'].split('boundary=').pop();
+        let data_group = [...data_string.matchAll(/name=\"(\w+)\"\r\n\r\n/g)];
+
+        data_group.forEach(element => {
+          let name = element[1];
+          let start = element.input.indexOf(element[0]) + element[0].length;
+
+          /* '--' Zadarma server side bug (headers boundary != body boundary)
+          need add '--' to boundry in body or substract '--' from headers boundary */
+          let end = element.input.indexOf(`\r\n--${boundary}`, start);
+
+          obj[name] = element.input.substring(start, end);
+        });
+
+        resolve(obj);
+
+      }
+    })
+
+    req.on('error', function (error) {
       console.error(error);
       reject({});
     });
@@ -54,15 +79,15 @@ const zadarma_events_list = [
   'NOTIFY_OUT_START',
   'NOTIFY_OUT_END',
   'NOTIFY_RECORD',
-  'NOTIFY_IVR',//method not implemented
-  'SPEECH_RECOGNITION',//method not implemented
-  'NUMBER_LOOKUP',//method not implemented
-  'CALL_TRACKING',//method not implemented
+  'NOTIFY_IVR',
+  'SPEECH_RECOGNITION',
+  'NUMBER_LOOKUP',
+  'CALL_TRACKING',
   'SMS'
 ];
 
 const handlers = {
-  'NOTIFY_START': function NOTIFY_START(data, signature){
+  'NOTIFY_START': function NOTIFY_START(data, signature) {
 
     temporary_storage[data.pbx_call_id] = {
       event: [data.event],
@@ -75,9 +100,9 @@ const handlers = {
 
     return temporary_storage[data.pbx_call_id];
   },
-  'NOTIFY_END': function NOTIFY_END(data, signature){
+  'NOTIFY_END': function NOTIFY_END(data, signature) {
     temporary_storage[data.pbx_call_id].event.push(data.event);
-    
+
     Object.assign(
       temporary_storage[data.pbx_call_id],
       {
@@ -87,11 +112,11 @@ const handlers = {
         status_code: data.status_code,
         is_recorded: data.is_recorded,
         verify: verify_data(`${data.caller_id}${data.called_did}${data.call_start}`, signature)
-      }  
+      }
     );
     return temporary_storage[data.pbx_call_id];
   },
-  'NOTIFY_OUT_START': function NOTIFY_OUT_START(data, signature){
+  'NOTIFY_OUT_START': function NOTIFY_OUT_START(data, signature) {
 
     temporary_storage[data.pbx_call_id] = {
       event: [data.event],
@@ -108,7 +133,7 @@ const handlers = {
 
     return temporary_storage[data.pbx_call_id];
   },
-  'NOTIFY_OUT_END': function NOTIFY_OUT_END(data, signature){
+  'NOTIFY_OUT_END': function NOTIFY_OUT_END(data, signature) {
 
     temporary_storage[data.pbx_call_id].event.push(data.event);
 
@@ -127,7 +152,7 @@ const handlers = {
 
     return temporary_storage[data.pbx_call_id]
   },
-  'NOTIFY_INTERNAL': function NOTIFY_INTERNAL(data, signature){
+  'NOTIFY_INTERNAL': function NOTIFY_INTERNAL(data, signature) {
 
     temporary_storage[data.pbx_call_id].event.push(data.event)
     temporary_storage[data.pbx_call_id].internal = data.internal;
@@ -136,7 +161,7 @@ const handlers = {
     return temporary_storage[data.pbx_call_id];
   },
 
-  'NOTIFY_ANSWER': function NOTIFY_INTERNAL(data, signature){
+  'NOTIFY_ANSWER': function NOTIFY_INTERNAL(data, signature) {
 
     temporary_storage[data.pbx_call_id].event.push(data.event);
     temporary_storage[data.pbx_call_id].internal = data.internal;
@@ -147,16 +172,16 @@ const handlers = {
     return temporary_storage[data.pbx_call_id];
   },
 
-  'NOTIFY_RECORD': function NOTIFY_RECORD(data, signature){
-    
+  'NOTIFY_RECORD': function NOTIFY_RECORD(data, signature) {
+
     temporary_storage[data.pbx_call_id].event.push(data.event);
     temporary_storage[data.pbx_call_id].call_id_with_rec = data.call_id_with_rec;
     temporary_storage[data.pbx_call_id].verify = verify_data(`${data.pbx_call_id}${data.call_id_with_rec}`, signature);
-    
+
     return temporary_storage[data.pbx_call_id]
   },
-  'SMS': function SMS(data, signature){
-    
+  'SMS': function SMS(data, signature) {
+
     const result = JSON.parse(data.result);
 
     return {
@@ -167,59 +192,75 @@ const handlers = {
       to: result.caller_did,
       verify: verify_data(`${data.result}`, signature)
     };
+  },
+  'NOTIFY_IVR': function NOTIFY_IVR(data, signature) {
+    data.verify = verify_data(`${data.caller_id}${data.called_did}${data.call_start}`, signature);
+    return data
+  },
+  'SPEECH_RECOGNITION': function NOTIFY_IVR(data, signature) {
+    //the verify method for SPEECH_RECOGNITION is not described in the documentation
+    //data.verify = verify_data(`${data.result}`, signature);
+    return data
+  },
+  'NUMBER_LOOKUP': function NOTIFY_IVR(data, signature) {
+    data.verify = verify_data(`${data.result}`, signature);
+    return data
+  },
+  'CALL_TRACKING': function NOTIFY_IVR(data, signature) {
+    data.verify = verify_data(`${data.result}`, signature);
+    return data
   }
 }
 
 const temporary_storage = {};
 const user_handlers = {};
 
-const zadarma_express_handler = async function zadarma_express_handler(req, res){
-  if(!verify_ip(req)){
+const zadarma_express_handler = async function zadarma_express_handler(req, res) {
+  if (!verify_ip(req)) {
     return res.end()
   }
-  
-  console.log('req.query', !!Object.keys(req.query).length, req.query);
 
-  if(Object.keys(req.query).length){
+  if (Object.keys(req.query).length) {
     req.body = req.query;
-  }else{
+  } else {
     req.body = await parse_incoming_data_to_body_obj(req);
   }
 
-  if(check_zd_echo(req)){
+  if (check_zd_echo(req)) {
     //zadarma api performance check
     console.log('the api zadarma checks the un with an echo request');
     return res.end(req.body.zd_echo);
   }
 
-  const ctx = handlers[req.body.event](req.body, req.headers.signature);
+  const response_from_zadarma = handlers[req.body.event](req.body, req.headers.signature);
 
-  if(typeof user_handlers[req.body.event] === 'function'){
-    return user_handlers[req.body.event](ctx);
+  if (typeof user_handlers[req.body.event] === 'function') {
+    return user_handlers[req.body.event](response_from_zadarma);
   }
 }
 
-zadarma_express_handler.on = function on(event_name, user_callback_function){
-  if(!zadarma_events_list.includes(event_name)){
-    throw new Error('an unknown event handler is set, set handler from the list:\n'+
+zadarma_express_handler.on = function on(event_name, user_callback_function) {
+  if (!zadarma_events_list.includes(event_name)) {
+    throw new Error('an unknown event handler is set, set handler from the list:\n' +
       zadarma_events_list.join(',\n')
     );
   }
   user_handlers[event_name] = user_callback_function;
 }
 
-zadarma_express_handler.set_api_secret_key = function set_api_secret_key(key){
+zadarma_express_handler.set_api_secret_key = function set_api_secret_key(key) {
   api_secret_key = key;
 }
 
-zadarma_express_handler.clear_temporary_storage = function clear_temporary_storage(id){
-  if(id){
+zadarma_express_handler.clear_temporary_storage = function clear_temporary_storage(id) {
+  if (id) {
     delete temporary_storage[id]
-  }else{
+  } else {
     temporary_storage = {};
   }
 }
-zadarma_express_handler.get_temporary_storage = function get_temporary_storage(){
+
+zadarma_express_handler.get_temporary_storage = function get_temporary_storage() {
   return temporary_storage;
 }
 
