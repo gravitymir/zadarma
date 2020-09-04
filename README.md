@@ -1,6 +1,6 @@
 # zadarma
 
-![Tux, the Linux mascot](https://zadarma.com/images/content/news/zadarma.jpg?v1)
+![Tux, the Linux mascot](/zadrma/zadrma_node.jpeg)
 
 Module which help you work with API Zadarma (v1)
 
