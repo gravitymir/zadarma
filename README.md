@@ -39,11 +39,14 @@ process.env.ZADARMA_USER_KEY = 'a248a6a984459935b569';//your user key
 process.env.ZADARMA_SECRET_KEY = '8a8e91d214fb728889c7';//your secret key
 
 const { api } = require("zadarma");
-let tariff = await api({api_method: '/v1/tariff/'});
-let balance = await api({api_method: '/v1/info/balance/'});
 
-console.log(tariff);
-console.log(balance);
+(async () =>{
+  let tariff = await api({api_method: '/v1/tariff/'});
+  let balance = await api({api_method: '/v1/info/balance/'});
+
+  console.log(tariff);
+  console.log(balance);
+})()
 ```
 
 #### multi account use

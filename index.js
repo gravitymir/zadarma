@@ -43,15 +43,21 @@ const prepare_data_to_request = function prepare_data_to_request(...args) {
 
   let data = api_method + params_string + md5;
 
-  let sha1 = crypto.createHmac('sha1', api_secret_key)
-    .update(data).digest('hex');
+  if (api_secret_key && api_secret_key.length == 20) {
 
-  let sign = Buffer.from(sha1).toString('base64');
+    let sha1 = crypto.createHmac('sha1', api_secret_key)
+      .update(data).digest('hex');
 
-  return {
-    headers: { "Authorization": `${api_user_key}:${sign}` },
-    params_string: params_string
+    let sign = Buffer.from(sha1).toString('base64');
+
+    return {
+      headers: { "Authorization": `${api_user_key}:${sign}` },
+      params_string: params_string
+    }
   }
+
+  throw new Error('api secret key is not set,  ')
+
 }
 
 module.exports.api = async function request(...args) {
