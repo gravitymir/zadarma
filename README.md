@@ -205,6 +205,9 @@ console.log(response.data.labels);
 
 [API settings and description page](https://zadarma.com/support/api/)
 
+[Set link to your hendler server on description page](https://my.zadarma.com/api/#apitab-zcrm)
+
+
 ### Evenst
 
 1. NOTIFY_START - start incoming call
