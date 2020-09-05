@@ -1,6 +1,6 @@
 {
   "name": "zadarma",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "zadarma api v1",
   "main": "index.js",
   "deprecated": false,
