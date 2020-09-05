@@ -216,3 +216,40 @@ console.log(response.data.labels);
 1. NUMBER_LOOKUP
 1. CALL_TRACKING
 1. SMS
+
+
+```js
+const { zadarma_express_handler } = require("zadarma");
+
+const express = require('express');
+
+const app = express();
+
+zadarma_express_handler.on('NOTIFY_START', function(response){
+  console.log(response);
+});
+zadarma_express_handler.on('NOTIFY_END', function(response){
+  console.log(response);
+});
+zadarma_express_handler.on('NOTIFY_OUT_START', function(response){
+  console.log(response);
+});
+zadarma_express_handler.on('NOTIFY_OUT_END', function(response){
+  zadarma_express_handler.clear_temporary_storage(response.pbx_call_id);
+  console.log(response);
+});
+zadarma_express_handler.on('NOTIFY_RECORD', function(response){
+  console.log(response);
+});
+zadarma_express_handler.on('SMS', function(response){
+  console.log(response);
+  zadarma_express_handler.get_temporary_storage();
+  zadarma_express_handler.clear_temporary_storage();
+});
+
+//set api key or default your_api_key = process.env.ZADARMA_SECRET_KEY
+zadarma_express_handler.set_api_secret_key(your_api_key);
+
+app.use('/zadarma', zadarma_express_handler);
+app.listen(3000);
+````

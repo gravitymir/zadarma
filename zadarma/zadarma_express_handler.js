@@ -5,7 +5,7 @@ ip zadarma service
 https://my.zadarma.com/api/#apitab-zcrm
 from the bottom of the page
 */
-let api_secret_key// = process.env.ZADARMA_SECRET_KEY;
+let api_secret_key = process.env.ZADARMA_SECRET_KEY;
 
 const verify_ip = function verify_ip(req) {
   //http://164.90.214.160:8080/zadarma link to check and connect botton 
