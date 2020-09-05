@@ -204,18 +204,18 @@ console.log(response.data.labels);
 
 ### Evenst
 
-1. NOTIFY_START
-1. NOTIFY_INTERNAL
-1. NOTIFY_ANSWER
-1. NOTIFY_END
+1. NOTIFY_START - start incoming call
+1. NOTIFY_INTERNAL - dialing up to the internal on incoming call
+1. NOTIFY_ANSWER - the internal answered theincoming call
+1. NOTIFY_END - end incoming call
 1. NOTIFY_OUT_START
 1. NOTIFY_OUT_END
-1. NOTIFY_RECORD
+1. NOTIFY_RECORD - call recording is being prepared for download
 1. NOTIFY_IVR
 1. SPEECH_RECOGNITION
 1. NUMBER_LOOKUP
 1. CALL_TRACKING
-1. SMS
+1. SMS - incoming sms
 
 
 ```js
