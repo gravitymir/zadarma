@@ -229,6 +229,8 @@ zadarma_express_handler.on('NOTIFY_START', function(response){
   console.log(response);
 });
 zadarma_express_handler.on('NOTIFY_END', function(response){
+  let all_calls_before_clear_storage = zadarma_express_handler.get_temporary_storage();
+  zadarma_express_handler.clear_temporary_storage();
   console.log(response);
 });
 zadarma_express_handler.on('NOTIFY_OUT_START', function(response){
@@ -243,8 +245,6 @@ zadarma_express_handler.on('NOTIFY_RECORD', function(response){
 });
 zadarma_express_handler.on('SMS', function(response){
   console.log(response);
-  zadarma_express_handler.get_temporary_storage();
-  zadarma_express_handler.clear_temporary_storage();
 });
 
 //set api key or default your_api_key = process.env.ZADARMA_SECRET_KEY
