@@ -39,14 +39,11 @@ process.env.ZADARMA_USER_KEY = 'a248a6a984459935b569';//your user key
 process.env.ZADARMA_SECRET_KEY = '8a8e91d214fb728889c7';//your secret key
 
 const { api } = require("zadarma");
-
-(async () =>{
   let tariff = await api({api_method: '/v1/tariff/'});
   let balance = await api({api_method: '/v1/info/balance/'});
 
   console.log(tariff);
   console.log(balance);
-})()
 ```
 
 #### multi account use
@@ -205,7 +202,7 @@ console.log(response.data.labels);
 
 [API settings and description page](https://zadarma.com/support/api/)
 
-[Set link to your hendler server on description page](https://my.zadarma.com/api/#apitab-zcrm)
+[Set link to your hendler server on API description page](https://my.zadarma.com/api/#apitab-zcrm)
 
 
 ### Evenst
