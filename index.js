@@ -1,4 +1,4 @@
-require("./process.env.js");
+
 const { zadarma_express_handler } = require("./zadarma");
 
 const { api: z_api } = require("./zadarma");
