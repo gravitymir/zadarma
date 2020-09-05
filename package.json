@@ -4,8 +4,6 @@
   "description": "zadarma api v1",
   "main": "index.js",
   "deprecated": false,
-  "scripts": {
-  },
   "dependencies": {
     "axios": "^0.19.2",
     "crypto": "^1.0.1",
