@@ -28,9 +28,7 @@ Page authorization keys: [here](https://my.zadarma.com/api/#)
 ## Usage examples
 
 ``` js
-const {
-    api
-} = require("zadarma");
+const { api } = require("zadarma");
 ```
 
 #### single account use
@@ -40,9 +38,7 @@ const {
 process.env.ZADARMA_USER_KEY = 'a248a6a984459935b569';//your user key
 process.env.ZADARMA_SECRET_KEY = '8a8e91d214fb728889c7';//your secret key
 
-const {
-    api
-} = require("zadarma");
+const { api } = require("zadarma");
 let tariff = await api({api_method: '/v1/tariff/'});
 let balance = await api({api_method: '/v1/info/balance/'});
 
@@ -54,9 +50,7 @@ console.log(balance);
 
 ``` js
 //Example with send "api_user_key" && "api_secret_key"
-const {
-    api: z_api
-} = require("zadarma");
+const { api: z_api } = require("zadarma");
 let response = await z_api({
     api_method: '/v1/direct_numbers/',
     api_user_key: 'a248a6a984459935b569', //your user key
@@ -66,9 +60,7 @@ console.log(response);
 ```
 
 ``` js
-const {
-    api: z_api
-} = require("zadarma");
+const { api: z_api } = require("zadarma");
 
 let method = '/v1/pbx/internal/';
 let user_key = 'your_user_key';
