@@ -205,7 +205,7 @@ console.log(response.data.labels);
 [Set link to your hendler server on API description page](https://my.zadarma.com/api/#apitab-zcrm)
 
 
-### Evenst
+### Events
 
 1. NOTIFY_START - start incoming call
 1. NOTIFY_INTERNAL - dialing up to the internal on incoming call
