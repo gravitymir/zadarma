@@ -10,7 +10,7 @@
     "express-formidable": "^1.2.0",
     "http-build-query": "^0.7.0"
   },
-  "evDependencies": {
+  "devDependencies": {
     "axios": "^0.19.2",
     "crypto": "^1.0.1",
     "express-formidable": "^1.2.0",
