@@ -249,21 +249,26 @@ const app = express();
 zadarma_express_handler.on('NOTIFY_START', (request) => {
   console.log(request);
 });
+
 zadarma_express_handler.on('NOTIFY_END', (request) => {
   let all_calls_before_clear_storage = zadarma_express_handler.get_temporary_storage();
   zadarma_express_handler.clear_temporary_storage();
   console.log(request);
 });
+
 zadarma_express_handler.on('NOTIFY_OUT_START', (request) => {
   console.log(request);
 });
+
 zadarma_express_handler.on('NOTIFY_OUT_END', function(request){
   zadarma_express_handler.clear_temporary_storage(request.pbx_call_id);
   console.log(request);
 });
+
 zadarma_express_handler.on('NOTIFY_RECORD', function(request){
   console.log(request);
 });
+
 zadarma_express_handler.on('SMS', function(request){
   console.log(request);
 });
