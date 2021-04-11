@@ -1,20 +1,10 @@
 {
   "name": "zadarma",
-  "version": "1.0.4",
-  "description": "zadarma api v1",
+  "version": "1.0.5",
+  "description": "Module which help you work with API Zadarma (v1)",
   "main": "index.js",
-  "deprecated": false,
-  "dependencies": {
-    "axios": "^0.19.2",
-    "crypto": "^1.0.1",
-    "express-formidable": "^1.2.0",
-    "http-build-query": "^0.7.0"
-  },
-  "devDependencies": {
-    "axios": "^0.19.2",
-    "crypto": "^1.0.1",
-    "express-formidable": "^1.2.0",
-    "http-build-query": "^0.7.0"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -28,10 +18,15 @@
     "javascript"
   ],
   "author": "Andrey Sukhodeev",
-  "license": "MIT",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/gravitymir/zadarma/issues",
     "email": "gravitymir@gmail.com"
   },
-  "homepage": "https://github.com/gravitymir/zadarma#readme"
+  "homepage": "https://github.com/gravitymir/zadarma#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express-formidable": "^1.2.0",
+    "http-build-query": "^0.7.0"
+  }
 }
