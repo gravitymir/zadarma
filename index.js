@@ -7,7 +7,7 @@
 * https://zadarma.com/ru/support/api/
 * https://zadarma.com/en/support/api/
 * 
-* request() возвращает data из полученного response
+* request() returns data from respnce / возвращает data из полученного response
 *
 * @request <Object> request_data
 * @return <Object> response_data
@@ -30,6 +30,7 @@ const prepare_data_to_request = function prepare_data_to_request(...args) {
     api_user_key = process.env.ZADARMA_USER_KEY,
     api_secret_key = process.env.ZADARMA_SECRET_KEY
   } = args.shift();
+  
 
   let sorted_params = params_sort(params);
 
@@ -56,16 +57,24 @@ const prepare_data_to_request = function prepare_data_to_request(...args) {
     }
   }
 
-  throw new Error('api secret key is not set,  ')
+  throw new Error('api secret key is not set')
 
 }
 
 module.exports.api = async function request(...args) {
-  let { api_method, params, http_method = 'GET' } = args.shift();
+  let {
+    api_method,
+    params, 
+    http_method = 'GET',
+    api_user_key,
+    api_secret_key
+  } = args.shift();
 
   let { headers, params_string } = prepare_data_to_request({
     api_method: api_method,
-    params: params
+    params: params,
+    api_user_key: api_user_key,
+    api_secret_key: api_secret_key
   });
 
   return new Promise(resolve => {
