@@ -19,6 +19,8 @@ An official documentation on Zadarma API is [here](https://zadarma.com/support/a
 ``` shell
 #npm
 npm install zadarma
+#or
+npm i zadarma
 ```
 
 ## Authorization keys
@@ -35,28 +37,36 @@ const { api } = require("zadarma");
 
 ``` js
 //Example configure default config
+const { api } = require("zadarma");
+
 process.env.ZADARMA_USER_KEY = 'a248a6a984459935b569';//your user key
 process.env.ZADARMA_SECRET_KEY = '8a8e91d214fb728889c7';//your secret key
 
-const { api } = require("zadarma");
-  let tariff = await api({api_method: '/v1/tariff/'});
-  let balance = await api({api_method: '/v1/info/balance/'});
+(async () => {
+    let tariff = await api({api_method: '/v1/tariff/'});
+    let balance = await api({api_method: '/v1/info/balance/'});
 
-  console.log(tariff);
-  console.log(balance);
+    console.log(tariff);
+    console.log(balance);
+})()
 ```
 
 #### multi account use
 
 ``` js
 //Example with send "api_user_key" && "api_secret_key"
-const { api: z_api } = require("zadarma");
-let response = await z_api({
-    api_method: '/v1/direct_numbers/',
-    api_user_key: 'a248a6a984459935b569', //your user key
-    api_secret_key: '8a8e91d214fb728889c7' //your secret key
-});
-console.log(response);
+const { api: z_api/*rename "api": "your name"*/ } = require("zadarma");
+
+(async () => {
+
+    let response = await z_api({
+        api_method: '/v1/direct_numbers/',
+        api_user_key: 'a248a6a984459935b569', //your user key
+        api_secret_key: '8a8e91d217fb728889c7' //your secret key
+    });
+    console.log(response);
+
+})()
 ```
 
 ``` js
@@ -66,12 +76,16 @@ let method = '/v1/pbx/internal/';
 let user_key = 'your_user_key';
 let secret_key = 'your_secret_key';
 
-let response = await z_api({
-    api_method: method,
-    api_user_key: user_key,
-    api_secret_key: secret_key
-});
-console.log(response);
+(async () => {
+
+    let response = await z_api({
+        api_method: method,
+        api_user_key: user_key,
+        api_secret_key: secret_key
+    });
+    console.log(response);
+
+})()
 ```
 
 #### parameters
@@ -96,7 +110,7 @@ console.log(response);
 //Example with http_method "post" for api_method "/v1/sms/send/"
 let from = '67200000000'; //[optional] your verified phone number
 let to = '67200000000';
-let message = 'test sms 0987654321\nтестовый текст';
+let message = 'Test sms 0987654321\nТестовый текст';
 
 let response = await z_api({
     http_method: 'POST',
@@ -111,9 +125,13 @@ console.log(response);
 ```
 
 #### zcrm methods examples
+ZCRM integration on/off page [here](https://my.zadarma.com/api/#apitab-zcrm)
 
 ``` js
 //example get all customers
+process.env.ZADARMA_USER_KEY = 'a248a6a984459935b569';//your user key
+process.env.ZADARMA_SECRET_KEY = '8a8e91d214fb728889c7';//your secret key
+
 let response = await z_api({
     api_method: '/v1/zcrm/customers'
 });
@@ -228,31 +246,31 @@ const express = require('express');
 
 const app = express();
 
-zadarma_express_handler.on('NOTIFY_START', function(response){
-  console.log(response);
+zadarma_express_handler.on('NOTIFY_START', (request) => {
+  console.log(request);
 });
-zadarma_express_handler.on('NOTIFY_END', function(response){
+zadarma_express_handler.on('NOTIFY_END', (request) => {
   let all_calls_before_clear_storage = zadarma_express_handler.get_temporary_storage();
   zadarma_express_handler.clear_temporary_storage();
-  console.log(response);
+  console.log(request);
 });
-zadarma_express_handler.on('NOTIFY_OUT_START', function(response){
-  console.log(response);
+zadarma_express_handler.on('NOTIFY_OUT_START', (request) => {
+  console.log(request);
 });
-zadarma_express_handler.on('NOTIFY_OUT_END', function(response){
-  zadarma_express_handler.clear_temporary_storage(response.pbx_call_id);
-  console.log(response);
+zadarma_express_handler.on('NOTIFY_OUT_END', function(request){
+  zadarma_express_handler.clear_temporary_storage(request.pbx_call_id);
+  console.log(request);
 });
-zadarma_express_handler.on('NOTIFY_RECORD', function(response){
-  console.log(response);
+zadarma_express_handler.on('NOTIFY_RECORD', function(request){
+  console.log(request);
 });
-zadarma_express_handler.on('SMS', function(response){
-  console.log(response);
+zadarma_express_handler.on('SMS', function(request){
+  console.log(request);
 });
 
 //set api key or default your_api_key = process.env.ZADARMA_SECRET_KEY
 zadarma_express_handler.set_api_secret_key(your_api_key);
 
 app.use('/zadarma', zadarma_express_handler);
-app.listen(3000);
+app.listen(3000); //app.listen(your port)
 ````
