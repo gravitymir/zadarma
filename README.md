@@ -1,4 +1,5 @@
-![https://img.shields.io/github/package-json/v/gravitymir/zadarma]
+
+![version](https://img.shields.io/github/package-json/v/gravitymir/zadarma)
 # zadarma
 
 ![Zadarma Nodes.js](https://raw.githubusercontent.com/gravitymir/zadarma/master/zadarma_node.jpeg)
