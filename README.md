@@ -1,5 +1,5 @@
 
-![version](https://img.shields.io/github/package-json/v/gravitymir/zadarma?logo=npm&color=1F618D)
+![version](https://img.shields.io/github/package-json/v/gravitymir/zadarma?logo=npm)
 ![npm downloads per month](https://img.shields.io/npm/dm/zadarma?logo=npm&color=1E8449)
 ![GitHub open issues](https://img.shields.io/github/issues/gravitymir/zadarma?&logo=github)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/gravitymir/zadarma?&logo=github)
