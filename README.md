@@ -4,7 +4,7 @@
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/gravitymir/zadarma?logo=github)
 ![Github Repository Size](https://img.shields.io/github/repo-size/gravitymir/zadarma?logo=github)
-![Github forks](https://img.shields.io/github/forks/gravitymir/zadarma?logo=github)
+[![Github forks](https://img.shields.io/github/forks/gravitymir/zadarma?logo=github)](https://github.com/gravitymir/zadarma/network/members)
 ![Lines of code](https://img.shields.io/tokei/lines/github.com/gravitymir/zadarma?logo=github)
 [![GitHub open issues](https://img.shields.io/github/issues/gravitymir/zadarma?logo=github)](https://github.com/gravitymir/zadarma/issues)
 [![GitHub closed issues](https://img.shields.io/github/issues-closed/gravitymir/zadarma?logo=github)](https://github.com/gravitymir/zadarma/issues)
