@@ -6,8 +6,8 @@
 ![Github Repository Size](https://img.shields.io/github/repo-size/gravitymir/zadarma?&logo=github&color=1F618D)
 ![Github forks](https://img.shields.io/github/forks/gravitymir/zadarma?&logo=github&color=1F618D)
 
-![GitHub Repo stars](https://img.shields.io/github/stars/gravitymir/zadarma?label=zadarma&logo=github&color=1F618D&logoColor=1E8449)
-![GitHub User's stars](https://img.shields.io/github/stars/gravitymir?label=gravitymir&logo=github&color=1F618D&logoColor=1E8449)
+![GitHub Repo stars](https://img.shields.io/github/stars/gravitymir/zadarma?label=zadarma&logo=github&color=1F618D&logoColor=000)
+![GitHub User's stars](https://img.shields.io/github/stars/gravitymir?label=gravitymir&logo=github&color=1F618D&logoColor=000)
 # zadarma
 
 ![Zadarma Nodes.js](https://raw.githubusercontent.com/gravitymir/zadarma/master/zadarma_node.jpeg)
