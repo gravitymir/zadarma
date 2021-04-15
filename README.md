@@ -9,7 +9,7 @@
 ![GitHub open issues](https://img.shields.io/github/issues/gravitymir/zadarma?logo=github)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/gravitymir/zadarma?logo=github)
 
-![GitHub Repo stars](https://img.shields.io/github/stars/gravitymir/zadarma?label=zadarma&logo=github&color=505050&logoColor=fff)
+[![GitHub Repo stars](https://img.shields.io/github/stars/gravitymir/zadarma?label=zadarma&logo=github&color=505050&logoColor=fff)](https://github.com/gravitymir/zadarma)
 [![GitHub User's stars](https://img.shields.io/github/stars/gravitymir?label=gravitymir&logo=github&color=505050&logoColor=fff)](https://github.com/gravitymir)
 
 # zadarma
