@@ -11,7 +11,7 @@
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/gravitymir/zadarma?label=zadarma&logo=github&color=505050&logoColor=fff)](https://github.com/gravitymir/zadarma)
 [![GitHub User's stars](https://img.shields.io/github/stars/gravitymir?label=gravitymir&logo=github&color=505050&logoColor=fff)](https://github.com/gravitymir)
-[![Linkedin](https://img.shields.io/badge/Linkedin-Linkedin?logo=linkedin)](https://www.linkedin.com/in/andrey-sukhodeev-108a131b9/)
+[![Linkedin](https://img.shields.io/badge/Linkedin-Linkedin?logo=linkedin&color=000&logoColor=0B66C3)](https://www.linkedin.com/in/andrey-sukhodeev-108a131b9/)
 
 # zadarma
 
