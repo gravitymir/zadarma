@@ -3,9 +3,11 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/gravitymir/zadarma?logo=github)
 ![GitHub open issues](https://img.shields.io/github/issues/gravitymir/zadarma?logo=github)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/gravitymir/zadarma?logo=github)
+
+
 ![Github Repository Size](https://img.shields.io/github/repo-size/gravitymir/zadarma?logo=github)
 ![Github forks](https://img.shields.io/github/forks/gravitymir/zadarma?logo=github)
-
+![Lines of code](https://img.shields.io/tokei/lines/github.com/gravitymir/zadarma?logo=github)
 ![GitHub Repo stars](https://img.shields.io/github/stars/gravitymir/zadarma?label=zadarma&logo=github&color=252525&logoColor=252525)
 ![GitHub User's stars](https://img.shields.io/github/stars/gravitymir?label=gravitymir&logo=github&color=252525&logoColor=252525)
 # zadarma
