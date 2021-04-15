@@ -1,7 +1,8 @@
 
 ![version](https://img.shields.io/github/package-json/v/gravitymir/zadarma)
 ![npm downloads per month](https://img.shields.io/npm/dm/zadarma)
-![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/gravitymir/zadarma)
+![GitHub closed issues](https://img.shields.io/github/issues-closed/gravitymir/zadarma)
+![GitHub open issues](https://img.shields.io/github/issues/gravitymir/zadarma)
 # zadarma
 
 ![Zadarma Nodes.js](https://raw.githubusercontent.com/gravitymir/zadarma/master/zadarma_node.jpeg)
