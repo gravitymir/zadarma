@@ -1,4 +1,4 @@
-![version](https://img.shields.io/github/package-json/v/gravitymir/zadarma?logo=npm)
+![version](https://img.shields.io/github/package-json/v/gravitymir/zadarma?logo=npm&?link=https://www.npmjs.com/package/zadarma&link=https://www.npmjs.com/package/zadarma)
 ![npm downloads per month](https://img.shields.io/npm/dm/zadarma?logo=npm)
 ![license](https://img.shields.io/npm/l/zadarma?logo=npm)
 
