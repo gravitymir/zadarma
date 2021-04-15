@@ -1,7 +1,7 @@
-[https://img.shields.io/github/package-json/v/gravitymir/zadarma]
+![https://img.shields.io/github/package-json/v/gravitymir/zadarma]
 # zadarma
 
-#![Zadarma Nodes.js](https://raw.githubusercontent.com/gravitymir/zadarma/master/zadarma_node.jpeg)
+![Zadarma Nodes.js](https://raw.githubusercontent.com/gravitymir/zadarma/master/zadarma_node.jpeg)
 
 Module which help you work with API Zadarma (v1)
 
