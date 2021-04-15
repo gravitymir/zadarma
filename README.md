@@ -1,13 +1,13 @@
 
-![version](https://img.shields.io/github/package-json/v/gravitymir/zadarma?logo=npm)
-![npm downloads per month](https://img.shields.io/npm/dm/zadarma?logo=npm&color=1E8449&logoColor=1E8449)
+![version](https://img.shields.io/github/package-json/v/gravitymir/zadarma?logo=npm&color=1F618D)
+![npm downloads per month](https://img.shields.io/npm/dm/zadarma?logo=npm&color=1E8449)
 ![GitHub open issues](https://img.shields.io/github/issues/gravitymir/zadarma?&logo=github)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/gravitymir/zadarma?&logo=github)
-![Github Repository Size](https://img.shields.io/github/repo-size/gravitymir/zadarma?&logo=github)
-![Github forks](https://img.shields.io/github/forks/gravitymir/zadarma?&logo=github)
+![Github Repository Size](https://img.shields.io/github/repo-size/gravitymir/zadarma?&logo=github&color=1F618D)
+![Github forks](https://img.shields.io/github/forks/gravitymir/zadarma?&logo=github&color=1F618D)
 
-![GitHub Repo stars](https://img.shields.io/github/stars/gravitymir/zadarma?label=zadarma&logo=github)
-![GitHub User's stars](https://img.shields.io/github/stars/gravitymir?label=gravitymir&logo=github)
+![GitHub Repo stars](https://img.shields.io/github/stars/gravitymir/zadarma?label=zadarma&logo=github&color=1F618D)
+![GitHub User's stars](https://img.shields.io/github/stars/gravitymir?label=gravitymir&logo=github&color=1F618D)
 # zadarma
 
 ![Zadarma Nodes.js](https://raw.githubusercontent.com/gravitymir/zadarma/master/zadarma_node.jpeg)
