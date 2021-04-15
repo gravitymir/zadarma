@@ -18,7 +18,7 @@
     "javascript"
   ],
   "author": "Andrey Sukhodeev",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/gravitymir/zadarma/issues",
     "email": "gravitymir@gmail.com"
