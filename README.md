@@ -11,6 +11,12 @@
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/gravitymir/zadarma?label=zadarma&logo=github&color=505050&logoColor=fff)
 ![GitHub User's stars](https://img.shields.io/github/stars/gravitymir?label=gravitymir&logo=github&color=505050&logoColor=fff)
+
+  [![NPM Version][npm-image]][npm-url]
+  [![NPM Downloads][downloads-image]][downloads-url]
+  [![Linux Build][travis-image]][travis-url]
+  [![Windows Build][appveyor-image]][appveyor-url]
+ [![Test Coverage][coveralls-image]][coveralls-url]
 # zadarma
 
 ![Zadarma Nodes.js](https://raw.githubusercontent.com/gravitymir/zadarma/master/zadarma_node.jpeg)
