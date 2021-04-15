@@ -1,8 +1,6 @@
 
 ![version](https://img.shields.io/github/package-json/v/gravitymir/zadarma?logo=npm)
-![npm downloads per month](https://img.shields.io/npm/dm/zadarma?logo=npm&color=%23229954&logoColor=%23229954)
-
-
+![npm downloads per month](https://img.shields.io/npm/dm/zadarma?logo=npm&color=%#1E8449&logoColor=%#1E8449)
 ![GitHub open issues](https://img.shields.io/github/issues/gravitymir/zadarma)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/gravitymir/zadarma)
 ![Github Repository Size](https://img.shields.io/github/repo-size/gravitymir/zadarma)
