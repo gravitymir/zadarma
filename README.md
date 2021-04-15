@@ -4,6 +4,7 @@
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/gravitymir/zadarma)
 ![GitHub open issues](https://img.shields.io/github/issues/gravitymir/zadarma)
 ![Github Repository Size](https://img.shields.io/github/repo-size/gravitymir/zadarma)
+![Forks](https://img.shields.io/github/forks/gravitymir/zadarma?style=social)
 # zadarma
 
 ![Zadarma Nodes.js](https://raw.githubusercontent.com/gravitymir/zadarma/master/zadarma_node.jpeg)
