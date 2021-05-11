@@ -281,8 +281,27 @@ zadarma_express_handler.on('NOTIFY_OUT_END', function(request){
   console.log(request);
 });
 
-zadarma_express_handler.on('NOTIFY_RECORD', function(request){
-  console.log(request);
+
+const { api: z_api/*rename "api": "your name"*/ } = require("zadarma");
+
+zadarma_express_handler.on('NOTIFY_RECORD', async incoming_request => {
+    //Need dalay, if not wait few time, servise Zadarma send message ~~~"File not found"!
+    setTimeout(async () => {
+    
+        let res = await z_api({
+            api_method: '/v1/pbx/record/request/',
+            api_user_key: 'a248a6a984459935b569', //your user key
+            api_secret_key: '8a8e91d217fb728889c7', //your secret key
+            params: {
+                pbx_call_id: incoming_request.pbx_call_id,
+                lifetime : 7200
+            }
+        });
+        console.log(res)
+        //console.log(res.data.links[0] ? res.data.links[0]: res.data.link)
+        //console.log(res.links[0] ? res.links[0]: res.link)
+        
+    }, 15000);//15sec [variable, need test optimal time dalay] if not important put more
 });
 
 zadarma_express_handler.on('SMS', function(request){
