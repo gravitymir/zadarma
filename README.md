@@ -16,7 +16,7 @@
 
 # zadarma
 
-![Zadarma Nodes.js](https://raw.githubusercontent.com/gravitymir/zadarma/master/zadarma_node.png)
+![Zadarma Nodes.js](https://raw.githubusercontent.com/gravitymir/zadarma/master/zadarma_node.jpg)
 
 Module which help you work with API Zadarma (v1)
 
