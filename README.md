@@ -16,7 +16,7 @@
 
 # zadarma
 
-![Zadarma Nodes.js](https://raw.githubusercontent.com/gravitymir/zadarma/master/zadarma_node.jpeg)
+![Zadarma Nodes.js](https://raw.githubusercontent.com/gravitymir/zadarma/master/zadarma_node.png)
 
 Module which help you work with API Zadarma (v1)
 
@@ -59,11 +59,18 @@ process.env.ZADARMA_USER_KEY = 'a248a6a984459935b569';//your user key
 process.env.ZADARMA_SECRET_KEY = '8a8e91d214fb728889c7';//your secret key
 
 (async () => {
-    let tariff = await api({api_method: '/v1/tariff/'});
+    //https://zadarma.com/ru/support/api/#api_info_balance
     let balance = await api({api_method: '/v1/info/balance/'});
+    
+    //https://zadarma.com/ru/support/api/#api_info_timezone
+    let timezone = await api({api_method: '/v1/info/timezone/'});
 
-    console.log(tariff);
+    //https://zadarma.com/ru/support/api/#api_tariff
+    let tariff = await api({api_method: '/v1/tariff/'});
+
     console.log(balance);
+    console.log(timezone);
+    console.log(tariff);
 })()
 ```
 
@@ -93,37 +100,64 @@ let user_key = 'your_user_key';
 let secret_key = 'your_secret_key';
 
 (async () => {
-
-    let response = await z_api({
+    let dataObj = await z_api({
         api_method: method,
         api_user_key: user_key,
         api_secret_key: secret_key
     });
-    console.log(response);
-
+    console.log(dataObj);
 })()
+
+```
+``` js
+const { api: z_api } = require("zadarma");
+
+let method = '/v1/pbx/callinfo/';
+let user_key = 'your_user_key';
+let secret_key = 'your_secret_key';
+
+(async () => {
+    let dataObj = await z_api({
+        api_method: method,
+        api_user_key: user_key,
+        api_secret_key: secret_key
+    });
+    console.log(dataObj);
+})()
+
 ```
 
 #### parameters
 
 ``` js
-//Example with parameters
-let response = await z_api({
-    api_method: '/v1/request/callback/',
-    params: {
-        from: '73919100000',
-        to: '67200000000',
-        sip: '100',
-        predicted: 'predicted'
-    }
-});
-console.log(response);
+//https://zadarma.com/ru/support/api/#api_callback
+const { api: z_api } = require("zadarma");
+
+let userKey = 'your_user_key 20 symbols';
+let secretKey = 'user_secret_key 20 symbols';
+
+(async () => {
+    //Example with parameters
+    let response = await z_api({
+        api_method: '/v1/request/callback/',
+        api_user_key: userKey,
+        api_secret_key: secretKey,
+        params: {
+            from: '73919100000',
+            to: '67200000000',
+            sip: '100',
+            predicted: 'predicted'
+        }
+    });
+    console.log(response);
+})()
 ```
 
 #### http_method "post"
 
 ``` js
-//Example with http_method "post" for api_method "/v1/sms/send/"
+//https://zadarma.com/ru/support/api/#api_sms_send
+
 let from = '67200000000'; //[optional] your verified phone number
 let to = '67200000000';
 let message = 'Test sms 0987654321\nТестовый текст';

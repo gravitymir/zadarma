@@ -215,10 +215,9 @@ const handlers = {
 const temporary_storage = {};
 const user_handlers = {};
 
-const zadarma_express_handler = async function zadarma_express_handler(req, res, next) {
+const zadarma_express_handler = async function zadarma_express_handler(req, res) {
   if (!verify_ip(req)) {
-    res.end()
-    return next()
+    return res.end()
   }
 
   if (Object.keys(req.query).length) {
@@ -230,8 +229,7 @@ const zadarma_express_handler = async function zadarma_express_handler(req, res,
   if (check_zd_echo(req)) {
     //zadarma api performance check
     console.log('the api zadarma checks the un with an echo request');
-    res.end(req.body.zd_echo);
-    return next()
+    return res.end(req.body.zd_echo);
   }
 
   const response_from_zadarma = handlers[req.body.event](req.body, req.headers.signature);
