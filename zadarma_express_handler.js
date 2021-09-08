@@ -235,7 +235,7 @@ const zadarma_express_handler = async function zadarma_express_handler(req, res)
   const response_from_zadarma = handlers[req.body.event](req.body, req.headers.signature);
 
   if (typeof user_handlers[req.body.event] === 'function') {
-    return user_handlers[req.body.event](response_from_zadarma);
+    return user_handlers[req.body.event](response_from_zadarma, res);
   }
 }
 
