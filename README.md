@@ -297,9 +297,20 @@ const app = express();
 
 process.env.ZADARMA_SECRET_KEY = 'de4b346b835b86158244';//your secret key
 
-zadarma_express_handler.on('NOTIFY_START', request => {
+//https://zadarma.com/ru/support/api/#api_webhook_notify_start
+zadarma_express_handler.on('NOTIFY_START', (request, response) => {
   console.log(request);
+  response.set('Content-Type', 'application/json');
+  res.json({"ivr_play": "ID"})
+
+  res.json({
+    "ivr_saynumber": "123",
+    "language": "en"
+  })
+
+  res.end()
 });
+
 
 zadarma_express_handler.on('NOTIFY_END', request => {
   let all_calls_before_clear_storage = zadarma_express_handler.get_temporary_storage();
@@ -307,8 +318,10 @@ zadarma_express_handler.on('NOTIFY_END', request => {
   console.log(request);
 });
 
+
 zadarma_express_handler.on('NOTIFY_OUT_START', request => {
-  console.log(request);
+    console.log(request);
+    
 });
 
 zadarma_express_handler.on('NOTIFY_OUT_END', request => {
