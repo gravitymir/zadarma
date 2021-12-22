@@ -295,7 +295,7 @@ const express = require('express');
 
 const app = express();
 
-process.env.ZADARMA_SECRET_KEY = 'de4b346b835b86158244';//your secret key
+process.env.ZADARMA_SECRET_KEY = 'de4b346b835b86158233';//your secret key
 
 //https://zadarma.com/ru/support/api/#api_webhook_notify_start
 zadarma_express_handler.on('NOTIFY_START', (request, response) => {
