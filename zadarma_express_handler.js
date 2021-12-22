@@ -206,7 +206,7 @@ const handlers = {
       to: result.caller_did,
       text: result.text,
       caller_id: result.caller_id,
-      caller_did: result.caller_did,
+      caller_did: result.caller_did
     };
   },
   'NOTIFY_IVR': function NOTIFY_IVR(data, signature) {
