@@ -324,8 +324,8 @@ zadarma_express_handler.on('NOTIFY_RECORD', async incoming_request => {
     
         let res = await z_api({
             api_method: '/v1/pbx/record/request/',
-            api_user_key: 'a248a6a984459935b569', //[your user key]
-            api_secret_key: '8a8e91d217fb728889c7', //[your secret key]
+            api_user_key: 'a248a6a984459935b569', // || [process.env.ZADARMA_USER_KEY]
+            api_secret_key: '8a8e91d217fb728889c7', // || [process.env.ZADARMA_SECRET_KEY]
             params: {
                 pbx_call_id: incoming_request.pbx_call_id,
                 lifetime : 7200
