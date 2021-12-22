@@ -297,21 +297,21 @@ const app = express();
 
 process.env.ZADARMA_SECRET_KEY = 'de4b346b835b86158244';//your secret key
 
-zadarma_express_handler.on('NOTIFY_START', request => {{
+zadarma_express_handler.on('NOTIFY_START', request => {
   console.log(request);
 });
 
-zadarma_express_handler.on('NOTIFY_END', request => {{
+zadarma_express_handler.on('NOTIFY_END', request => {
   let all_calls_before_clear_storage = zadarma_express_handler.get_temporary_storage();
   zadarma_express_handler.clear_temporary_storage();
   console.log(request);
 });
 
-zadarma_express_handler.on('NOTIFY_OUT_START', request => {{
+zadarma_express_handler.on('NOTIFY_OUT_START', request => {
   console.log(request);
 });
 
-zadarma_express_handler.on('NOTIFY_OUT_END', request => {{
+zadarma_express_handler.on('NOTIFY_OUT_END', request => {
   zadarma_express_handler.clear_temporary_storage(request.pbx_call_id);
   console.log(request);
 });

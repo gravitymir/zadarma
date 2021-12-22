@@ -1,7 +1,7 @@
 /**
 * Zadarma API
 * Author: Andrey Sukhodeev
-* Date: 2021
+* Date: 23.12.2021
 * 
 * Description of methods
 * https://zadarma.com/ru/support/api/
