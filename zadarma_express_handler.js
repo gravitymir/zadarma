@@ -5,7 +5,6 @@ ip zadarma service
 https://my.zadarma.com/api/#apitab-zcrm
 from the bottom of the page
 */
-let api_secret_key = process.env.ZADARMA_SECRET_KEY;
 
 const verify_ip = function verify_ip(req) {
   return '185.45.152.42' === (req?.headers['x-forwarded-for'] || req?.connection?.remoteAddress.split(':').pop());
