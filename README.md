@@ -285,7 +285,7 @@ console.log(response.data.labels);
 1. NUMBER_LOOKUP
 1. CALL_TRACKING
 1. SMS - incoming sms
-
+1. NOTIFY_INTERNAL_END - halloween event ) событие не описано в документации на 22.12.2021
 
 ```js
 const { zadarma_express_handler } = require("zadarma");
@@ -294,21 +294,23 @@ const express = require('express');
 
 const app = express();
 
-zadarma_express_handler.on('NOTIFY_START', (request) => {
+process.env.ZADARMA_SECRET_KEY = 'de4b346b835b86158244';//your secret key
+
+zadarma_express_handler.on('NOTIFY_START', request => {{
   console.log(request);
 });
 
-zadarma_express_handler.on('NOTIFY_END', (request) => {
+zadarma_express_handler.on('NOTIFY_END', request => {{
   let all_calls_before_clear_storage = zadarma_express_handler.get_temporary_storage();
   zadarma_express_handler.clear_temporary_storage();
   console.log(request);
 });
 
-zadarma_express_handler.on('NOTIFY_OUT_START', (request) => {
+zadarma_express_handler.on('NOTIFY_OUT_START', request => {{
   console.log(request);
 });
 
-zadarma_express_handler.on('NOTIFY_OUT_END', function(request){
+zadarma_express_handler.on('NOTIFY_OUT_END', request => {{
   zadarma_express_handler.clear_temporary_storage(request.pbx_call_id);
   console.log(request);
 });
@@ -322,8 +324,8 @@ zadarma_express_handler.on('NOTIFY_RECORD', async incoming_request => {
     
         let res = await z_api({
             api_method: '/v1/pbx/record/request/',
-            api_user_key: 'a248a6a984459935b569', //your user key
-            api_secret_key: '8a8e91d217fb728889c7', //your secret key
+            api_user_key: 'a248a6a984459935b569', //[your user key]
+            api_secret_key: '8a8e91d217fb728889c7', //[your secret key]
             params: {
                 pbx_call_id: incoming_request.pbx_call_id,
                 lifetime : 7200
@@ -336,12 +338,9 @@ zadarma_express_handler.on('NOTIFY_RECORD', async incoming_request => {
     }, 15000);//15sec [variable, need test optimal time dalay] if not important put more
 });
 
-zadarma_express_handler.on('SMS', function(request){
+zadarma_express_handler.on('SMS', request => {
   console.log(request);
 });
-
-//set api key or default your_api_key = process.env.ZADARMA_SECRET_KEY
-zadarma_express_handler.set_api_secret_key(your_api_key);
 
 app.use('/zadarma', zadarma_express_handler);
 app.listen(3000); //app.listen(your port)
