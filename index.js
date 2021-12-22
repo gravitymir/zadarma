@@ -1,7 +1,7 @@
 /**
 * Zadarma API
 * Author: Andrey Sukhodeev
-* Date: 2020
+* Date: 2021
 * 
 * Description of methods
 * https://zadarma.com/ru/support/api/
@@ -34,6 +34,10 @@ const prepare_data_to_request = function prepare_data_to_request(obj) {
     //For application/x-www-form-urlencoded, spaces are to be replaced by "+".
     //Для application/x-www-form-urlencoded пробелы должны быть заменены на "+",
     //paramsString = paramsString.replace(/%20/g, '+');
+
+
+    //Page autorisation rules
+    //https://zadarma.com/ru/support/api/#intro_authorization
     let paramsString = '';
 
     if (Object.keys(params).length > 0) {
@@ -57,7 +61,7 @@ const prepare_data_to_request = function prepare_data_to_request(obj) {
             paramsString: paramsString
         }
     }
-    console.error('zadarma: api secret key is not set!!!')
+    console.error('zadarma: api secret key is not are set!!!')
 }
 
 module.exports.api = async function request(obj) {

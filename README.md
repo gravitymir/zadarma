@@ -270,7 +270,7 @@ console.log(response.data.labels);
 
 [Set link to your hendler server on API description page](https://my.zadarma.com/api/#apitab-zcrm)
 
-<b>Example link:</b> http://YOUR_IP:3000/zadarma
+####Example link: http://YOUR_IP:3000/zadarma
 
 ### Events
 

@@ -8,7 +8,6 @@ from the bottom of the page
 let api_secret_key = process.env.ZADARMA_SECRET_KEY;
 
 const verify_ip = function verify_ip(req) {
-  //http://164.90.214.160:8080/zadarma link to check and connect botton 
   return '185.45.152.42' === (req?.headers['x-forwarded-for'] || req?.connection?.remoteAddress.split(':').pop());
 }
 
@@ -21,9 +20,10 @@ const parse_incoming_data_to_body_obj = function parse_incoming_data_to_body_obj
     })
 
     req.on('end', function () {
+      console.log(req.headers)
       let data_string = incoming_data.toString('utf-8');
-
-      if (req.headers['content-type'].includes('application/x-www-form-urlencoded')) {
+      data_string = data_string.replace(/%20/g, '+')
+      if (req.headers['content-type'].includes("application/x-www-form-urlencoded")) {
         let array_pre_obj = data_string.split('&').map(i => {
           i = i.split('=');
           i[1] = decodeURIComponent(i[1]);
@@ -65,7 +65,7 @@ const check_zd_echo = function check_zd_echo(req) {
 
 const verify_data = function verify_data(data_string, signature) {
 
-  let sha1 = crypto.createHmac('sha1', api_secret_key)
+  let sha1 = crypto.createHmac('sha1', process.env.ZADARMA_SECRET_KEY)
     .update(data_string).digest('hex');
 
   return Buffer.from(sha1).toString('base64') === signature;
@@ -74,6 +74,11 @@ const verify_data = function verify_data(data_string, signature) {
 const zadarma_events_list = [
   'NOTIFY_START',
   'NOTIFY_INTERNAL',
+
+  //The event causing the error
+  'NOTIFY_INTERNAL_END',//Bug !!! Event not in docs https://zadarma.com/ru/support/api/#api_webhooks
+  //Gost Event
+
   'NOTIFY_ANSWER',
   'NOTIFY_END',
   'NOTIFY_OUT_START',
@@ -88,7 +93,6 @@ const zadarma_events_list = [
 
 const handlers = {
   'NOTIFY_START': function NOTIFY_START(data, signature) {
-
     temporary_storage[data.pbx_call_id] = {
       event: [data.event],
       pbx_call_id: data.pbx_call_id,
@@ -161,6 +165,17 @@ const handlers = {
     return temporary_storage[data.pbx_call_id];
   },
 
+  //Bug !!! Event not in docs
+  //https://zadarma.com/ru/support/api/#api_webhooks
+  'NOTIFY_INTERNAL_END': function NOTIFY_INTERNAL_END(data, signature) {
+    temporary_storage[data.pbx_call_id].event.push(data.event)
+    temporary_storage[data.pbx_call_id].internal = data.internal;
+    temporary_storage[data.pbx_call_id].verify = verify_data(`${data.caller_id}${data.called_did}${data.call_start}`, signature)
+
+    return temporary_storage[data.pbx_call_id];
+  },
+  
+
   'NOTIFY_ANSWER': function NOTIFY_INTERNAL(data, signature) {
 
     temporary_storage[data.pbx_call_id].event.push(data.event);
@@ -186,11 +201,12 @@ const handlers = {
 
     return {
       event: data.event,
-      caller_id: result.caller_id,
-      caller_did: result.caller_did,
+      verify: verify_data(`${data.result}`, signature),
       from: result.caller_id,
       to: result.caller_did,
-      verify: verify_data(`${data.result}`, signature)
+      text: result.text,
+      caller_id: result.caller_id,
+      caller_did: result.caller_did,
     };
   },
   'NOTIFY_IVR': function NOTIFY_IVR(data, signature) {
@@ -212,7 +228,7 @@ const handlers = {
   }
 }
 
-const temporary_storage = {};
+let temporary_storage = {};
 const user_handlers = {};
 
 const zadarma_express_handler = async function zadarma_express_handler(req, res) {
@@ -231,7 +247,7 @@ const zadarma_express_handler = async function zadarma_express_handler(req, res)
     console.log('the api zadarma checks the un with an echo request');
     return res.end(req.body.zd_echo);
   }
-
+  
   const response_from_zadarma = handlers[req.body.event](req.body, req.headers.signature);
 
   if (typeof user_handlers[req.body.event] === 'function') {
@@ -246,10 +262,6 @@ zadarma_express_handler.on = function on(event_name, user_callback_function) {
     );
   }
   user_handlers[event_name] = user_callback_function;
-}
-
-zadarma_express_handler.set_api_secret_key = function set_api_secret_key(key) {
-  api_secret_key = key;
 }
 
 zadarma_express_handler.clear_temporary_storage = function clear_temporary_storage(id) {
