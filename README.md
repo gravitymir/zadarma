@@ -307,13 +307,6 @@ zadarma_express_handler.on('NOTIFY_START', (request, response) => {
   //res.json({"redirect": "ID", ["return_timeout": TIMEOUT]})
   //res.json({"hangup": 1})
   //res.json({"ivr_saypopular": 1, "language": "en"})
-  
-
-{
-    "redirect": ID,
-    "return_timeout": TIMEOUT (необязательное)
-}
-
 
   res.json({
     "ivr_saynumber": "123",
