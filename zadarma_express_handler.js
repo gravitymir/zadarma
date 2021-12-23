@@ -19,7 +19,6 @@ const parse_incoming_data_to_body_obj = function parse_incoming_data_to_body_obj
     })
 
     req.on('end', function () {
-      console.log(req.headers)
       let data_string = incoming_data.toString('utf-8');
       data_string = data_string.replace(/%20/g, '+')
       if (req.headers['content-type'].includes("application/x-www-form-urlencoded")) {
