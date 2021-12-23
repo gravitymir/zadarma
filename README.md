@@ -299,9 +299,21 @@ process.env.ZADARMA_SECRET_KEY = 'de4b346b835b86158233';//your secret key
 
 //https://zadarma.com/ru/support/api/#api_webhook_notify_start
 zadarma_express_handler.on('NOTIFY_START', (request, response) => {
+  
   console.log(request);
+
   response.set('Content-Type', 'application/json');
-  res.json({"ivr_play": "ID"})
+  //res.json({"ivr_play": "ID"})
+  //res.json({"redirect": "ID", ["return_timeout": TIMEOUT]})
+  //res.json({"hangup": 1})
+  //res.json({"ivr_saypopular": 1, "language": "en"})
+  
+
+{
+    "redirect": ID,
+    "return_timeout": TIMEOUT (необязательное)
+}
+
 
   res.json({
     "ivr_saynumber": "123",
